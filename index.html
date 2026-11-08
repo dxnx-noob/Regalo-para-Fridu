@@ -1,25 +1,790 @@
-<!-- 12 AMISTAD -->
-<section class="screen">
-  <div class="panel">
-    <div class="emoji">♡</div>
-    <h2>Un mes de conocernos...</h2>
-    <p class="muted">Bueno, aproximadamente JAJAJA</p>
 
-    <div class="bigNumber">≈ 1 MES</div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Fridu ♡</title>
 
-    <p>
-      No sabemos exactamente cuándo empezamos a hablar,
-      pero sí sabemos que por aquí ya llevamos aproximadamente
-      un mes JAJAJA.
-    </p>
+<style>
+:root {
+  --pink: #f5a9c8;
+  --light: #ffe1ed;
+  --dark: #09070b;
+  --panel: #17121a;
+  --muted: #b9aab5;
+}
 
-    <p>
-      Y quién sabe cuántas conversaciones, risas y ocurrencias
-      nos esperan todavía. :3
-    </p>
+* {
+  box-sizing: border-box;
+}
 
-    <div class="emoji">💗</div>
-    <p class="muted">Y esto apenas comienza.</p>
-    <p>— Dono ♡</p>
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, #392033 0%, transparent 45%),
+    var(--dark);
+  color: white;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+#app {
+  width: 100%;
+  max-width: 650px;
+  padding: 22px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.progress {
+  height: 6px;
+  background: #30232e;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 22px;
+}
+
+#progressBar {
+  width: 6.25%;
+  height: 100%;
+  background: var(--pink);
+  transition: width .35s;
+}
+
+.screen {
+  display: none;
+  animation: appear .4s ease;
+}
+
+.screen.active {
+  display: block;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.panel {
+  background: rgba(23,18,26,.94);
+  border: 1px solid #543447;
+  border-radius: 25px;
+  padding: 30px 23px;
+  text-align: center;
+  box-shadow: 0 15px 50px #0008;
+}
+
+h1 {
+  font-size: clamp(30px, 8vw, 48px);
+  margin: 12px 0;
+  color: var(--light);
+}
+
+h2 {
+  color: var(--pink);
+  font-size: 27px;
+}
+
+p {
+  line-height: 1.65;
+  color: #eadde5;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.emoji {
+  font-size: 48px;
+  margin: 12px;
+}
+
+.bigNumber {
+  font-size: 42px;
+  font-weight: bold;
+  color: var(--pink);
+  margin: 20px 0;
+}
+
+button {
+  border: 0;
+  border-radius: 15px;
+  padding: 13px 19px;
+  margin: 7px 4px;
+  background: var(--pink);
+  color: #24131c;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .2s;
+}
+
+button:hover {
+  transform: scale(1.04);
+}
+
+button.secondary {
+  background: #30232e;
+  color: white;
+  border: 1px solid #76516a;
+}
+
+button:disabled {
+  opacity: .45;
+  cursor: default;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.nav button {
+  min-width: 115px;
+}
+
+.choice {
+  display: block;
+  width: 100%;
+  background: #30232e;
+  color: white;
+  border: 1px solid #76516a;
+}
+
+.result {
+  min-height: 35px;
+  color: var(--pink);
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.gift {
+  background: #30232e;
+  border: 1px solid #76516a;
+  border-radius: 18px;
+  padding: 15px;
+  margin: 12px 0;
+  cursor: pointer;
+}
+
+.gift:hover {
+  border-color: var(--pink);
+}
+
+.hiddenText {
+  display: none;
+  color: var(--light);
+  margin-top: 12px;
+}
+
+.memoryGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 9px;
+  margin-top: 20px;
+}
+
+.memoryCard {
+  aspect-ratio: 1;
+  font-size: 25px;
+  padding: 5px;
+  margin: 0;
+  background: #30232e;
+  color: white;
+  border: 1px solid #76516a;
+}
+
+.memoryCard.matched {
+  background: #68465b;
+  border-color: var(--pink);
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.photo {
+  min-height: 130px;
+  border: 1px dashed #a86d8d;
+  background: #30232e;
+  border-radius: 17px;
+  display: grid;
+  place-items: center;
+  padding: 12px;
+  color: var(--light);
+}
+
+a {
+  color: var(--pink);
+  overflow-wrap: anywhere;
+}
+
+.letter {
+  text-align: left;
+  background: #211923;
+  border-radius: 17px;
+  padding: 20px;
+  line-height: 1.8;
+}
+
+footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 20px;
+}
+
+#confetti {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+@media (max-width: 400px) {
+  #app { padding: 13px; }
+  .panel { padding: 24px 16px; }
+}
+</style>
+</head>
+
+<body>
+<div id="confetti"></div>
+
+<main id="app">
+  <div class="top">
+    <span>Un regalo para Fridu ♡</span>
+    <span id="counter">1 / 16</span>
   </div>
-</section>
+
+  <div class="progress">
+    <div id="progressBar"></div>
+  </div>
+
+  <!-- 1 BIENVENIDA -->
+  <section class="screen active">
+    <div class="panel">
+      <div class="emoji">🎀</div>
+      <p class="muted">Hay algo que quiero enseñarte...</p>
+      <h1>¡Hola, Fridu!</h1>
+      <p>Preparé algo especialmente para ti. No es un regalo común, así que tendrás que descubrirlo poquito a poquito. :b</p>
+      <p>¿Estás lista?</p>
+      <div class="emoji">💗</div>
+    </div>
+  </section>
+
+  <!-- 2 CUENTA REGRESIVA -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">🎂</div>
+      <h2>¡Se acerca tu día!</h2>
+      <p>Tu cumpleaños es el 12 de noviembre.</p>
+      <div class="bigNumber" id="countdown">Calculando...</div>
+      <p class="muted">Cada segundo falta un poquito menos para celebrar que existes. ♡</p>
+    </div>
+  </section>
+
+  <!-- 3 REGALITOS -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">🎁</div>
+      <h2>Tres regalitos para ti</h2>
+      <p>Abre cada uno. No tienen envoltura, pero sí intención. :b</p>
+
+      <div class="gift" onclick="reveal('gift1')">
+        🎁 Regalo número 1
+        <div class="hiddenText" id="gift1">Un deseo: que tengas muchísimos motivos para sonreír. 💗</div>
+      </div>
+
+      <div class="gift" onclick="reveal('gift2')">
+        🎁 Regalo número 2
+        <div class="hiddenText" id="gift2">Un recordatorio: eres una persona única y mereces cosas bonitas.</div>
+      </div>
+
+      <div class="gift" onclick="reveal('gift3')">
+        🎁 Regalo número 3
+        <div class="hiddenText" id="gift3">Un montón de buenas vibras para todo lo que viene. ✨</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 QUIZ -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">🧠</div>
+      <h2>Pequeño examen</h2>
+      <p>¿Cuáles son tus colores favoritos?</p>
+      <button class="choice" onclick="quiz(this,false)">Azul y amarillo</button>
+      <button class="choice" onclick="quiz(this,true)">Negro y rosa clarito</button>
+      <button class="choice" onclick="quiz(this,false)">Verde y morado</button>
+      <div class="result" id="quizResult"></div>
+    </div>
+  </section>
+
+  <!-- 5 JUEGO DE MEMORIA -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">🃏</div>
+      <h2>Encuentra las parejas</h2>
+      <p>Un pequeño juego para poner a trabajar esa memoria JAJAJA.</p>
+      <div class="memoryGrid" id="memoryGrid"></div>
+      <div class="result" id="memoryResult">Parejas encontradas: 0 / 4</div>
+      <button class="secondary" onclick="newMemoryGame()">Reiniciar juego</button>
+    </div>
+  </section>
+
+  <!-- 6 MAQUINA DE SUERTE -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">🔮</div>
+      <h2>Máquina de buenos deseos</h2>
+      <p>Presiona el botón y descubre qué te toca hoy.</p>
+      <div class="bigNumber" id="fortune">♡</div>
+      <button onclick="getFortune()">Descubrir mi suerte</button>
+    </div>
+  </section>
+
+  <!-- 7 CUANDO TE ABURRAS -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">🌷</div>
+      <h2>Abre esto cuando estés aburrida</h2>
+      <p>Porque no todo en la vida puede ser estar acostada viendo el celular JAJAJA.</p>
+      <button onclick="reveal('bored')">Abrir mensajito</button>
+      <div class="hiddenText" id="bored">
+        Misión del día: escucha una canción que te guste, sal un ratito, disfruta algo rico y recuerda que alguien se tomó el tiempo de hacerte esta página. :3
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 BOTON TRAMPA -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">🤨</div>
+      <h2>NO ME PIQUES</h2>
+      <p>En serio, Frida. No presiones el botón.</p>
+      <button id="trapButton" onclick="trap()">NO TOCAR</button>
+      <div class="result" id="trapResult"></div>
+    </div>
+  </section>
+
+  <!-- 9 GALERIA -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">📸</div>
+      <h2>Galería de Fridu</h2>
+      <p>Un espacio reservado para tus fotitos favoritas. 💗</p>
+      <div class="gallery">
+        <div class="photo">🌸<br>Tu foto favorita</div>
+        <div class="photo">🎀<br>Un recuerdo bonito</div>
+        <div class="photo">✨<br>Una sonrisa</div>
+        <div class="photo">💗<br>Otra fotito</div>
+      </div>
+      <p class="muted">Estas son solo espacios de muestra. Puedes agregar tus fotos cuando quieras.</p>
+    </div>
+  </section>
+
+  <!-- 10 MUSICA -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">🎧</div>
+      <h2>Un rinconcito musical</h2>
+      <p>También te dejo algo que encontré para ti:</p>
+      <a href="https://vt.tiktok.com/ZSpBjjBdG/" target="_blank" rel="noopener">♡ Abrir el TikTok que elegí para ti ♡</a>
+      <p>Y aquí tienes una pequeña melodía hecha con código. :b</p>
+      <button onclick="playMelody()">▶ Reproducir melodía</button>
+      <p class="muted">Puedes subir el volumen de tu dispositivo.</p>
+    </div>
+  </section>
+
+  <!-- 11 DATOS DE FRIDA -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">🌷</div>
+      <h2>Datos de una Fridu</h2>
+      <p>Una pequeña ficha de la cumpleañera:</p>
+      <p>🖤 Color favorito: negro</p>
+      <p>🌸 Otro color favorito: rosa clarito</p>
+      <p>🚲 Le gusta andar en bicicleta</p>
+      <p>🏋️ Le gusta ir al gimnasio</p>
+      <p class="muted">Y seguramente hay muchas cosas más que todavía me falta descubrir.</p>
+    </div>
+  </section>
+
+  <!-- 12 AMISTAD -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">♡</div>
+      <h2>Un mes de conocernos...</h2>
+      <p class="muted">Bueno, aproximadamente JAJAJA</p>
+
+      <div class="bigNumber">≈ 1 MES</div>
+
+      <p>
+        No sabemos exactamente cuándo empezamos a hablar,
+        pero sí sabemos que por aquí ya llevamos aproximadamente
+        un mes JAJAJA.
+      </p>
+
+      <p>
+        Y quién sabe cuántas conversaciones, risas y ocurrencias
+        nos esperan todavía. :3
+      </p>
+
+      <div class="emoji">💗</div>
+      <p class="muted">Y esto apenas comienza.</p>
+      <p>— Dono ♡</p>
+    </div>
+  </section>
+
+  <!-- 13 MENSAJES ALEATORIOS -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">💌</div>
+      <h2>Mensajitos aleatorios</h2>
+      <p>Presiona para recibir uno diferente.</p>
+      <div class="bigNumber" style="font-size:24px" id="randomMessage">♡</div>
+      <button onclick="randomMessage()">Otro mensajito</button>
+    </div>
+  </section>
+
+  <!-- 14 CARTA -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">✉️</div>
+      <h2>Una pequeña carta</h2>
+      <div class="letter">
+        <p>Hola, Fridu. 💗</p>
+        <p>
+          Quería hacer algo diferente para tu cumpleaños.
+          Aunque estemos lejos, quería tener un detallito contigo
+          y hacerte saber que me da gusto haberte conocido.
+        </p>
+        <p>
+          Espero que este nuevo año de vida venga lleno de
+          experiencias bonitas, nuevas aventuras, risas y muchas
+          cosas que te hagan feliz.
+        </p>
+        <p>
+          Gracias por las conversaciones, las ocurrencias
+          y por formar parte de mis días.
+        </p>
+        <p>
+          ¡Feliz cumpleaños adelantado, Fridu! :3
+        </p>
+        <p>— Dono ♡</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15 DEDICATORIA -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">🎀</div>
+      <h2>Esto es especialmente para ti</h2>
+      <p>
+        Esto lo hice especialmente para ti Fridu :b cada detalle
+        está aquí porque quería regalarte algo aunque fuera
+        a distancia :v
+      </p>
+      <div class="emoji">🖤💗</div>
+      <p>De parte de Dono</p>
+    </div>
+  </section>
+
+  <!-- 16 FINAL -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">🎉</div>
+      <h1>¡Feliz cumpleaños, Fridu!</h1>
+      <p>Espero que tu día sea tan bonito como tú y que este nuevo año esté lleno de cosas increíbles.</p>
+      <div class="bigNumber">12 · 11 · 2026</div>
+      <p>Gracias por llegar hasta el final de este pequeño regalo.</p>
+      <div class="emoji">🖤💗</div>
+      <h2>Con cariño, Dono ♡</h2>
+      <button onclick="celebrate()">¡Celebrar! 🎊</button>
+      <p class="muted">Fin... ¿o el comienzo de más historias? :b</p>
+    </div>
+  </section>
+
+  <div class="nav">
+    <button class="secondary" id="prev" onclick="changeScreen(-1)" disabled>← Anterior</button>
+    <button id="next" onclick="changeScreen(1)">Siguiente →</button>
+  </div>
+
+  <footer>Hecho con ♡ por Dono, especialmente para Fridu.</footer>
+</main>
+
+<script>
+const screens = document.querySelectorAll(".screen");
+let current = 0;
+
+function showScreen() {
+  screens.forEach((screen, i) => {
+    screen.classList.toggle("active", i === current);
+  });
+
+  document.getElementById("counter").textContent =
+    `${current + 1} / ${screens.length}`;
+
+  document.getElementById("progressBar").style.width =
+    `${((current + 1) / screens.length) * 100}%`;
+
+  document.getElementById("prev").disabled = current === 0;
+
+  document.getElementById("next").textContent =
+    current === screens.length - 1 ? "Volver al inicio ↺" : "Siguiente →";
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function changeScreen(direction) {
+  current += direction;
+
+  if (current >= screens.length) current = 0;
+  if (current < 0) current = 0;
+
+  showScreen();
+}
+
+function reveal(id) {
+  const element = document.getElementById(id);
+  element.style.display =
+    element.style.display === "block" ? "none" : "block";
+}
+
+function quiz(button, correct) {
+  const result = document.getElementById("quizResult");
+
+  if (correct) {
+    result.textContent = "¡Correctooo! Ya voy aprendiendo JAJAJA 💗";
+  } else {
+    result.textContent = "JAJAJA nooo, inténtalo otra vez. :b";
+  }
+}
+
+const symbols = ["🌸", "🎀", "🖤", "💗"];
+let cards = [];
+let firstCard = null;
+let lockBoard = false;
+let matches = 0;
+
+function newMemoryGame() {
+  cards = [...symbols, ...symbols].sort(() => Math.random() - 0.5);
+  firstCard = null;
+  lockBoard = false;
+  matches = 0;
+
+  document.getElementById("memoryResult").textContent =
+    "Parejas encontradas: 0 / 4";
+
+  const grid = document.getElementById("memoryGrid");
+  grid.innerHTML = "";
+
+  cards.forEach((symbol, index) => {
+    const button = document.createElement("button");
+    button.className = "memoryCard";
+    button.textContent = "?";
+    button.dataset.symbol = symbol;
+    button.dataset.index = index;
+    button.onclick = () => flipCard(button);
+    grid.appendChild(button);
+  });
+}
+
+function flipCard(card) {
+  if (lockBoard || card.classList.contains("matched") ||
+      card === firstCard || card.textContent !== "?") return;
+
+  card.textContent = card.dataset.symbol;
+
+  if (!firstCard) {
+    firstCard = card;
+    return;
+  }
+
+  if (firstCard.dataset.symbol === card.dataset.symbol) {
+    firstCard.classList.add("matched");
+    card.classList.add("matched");
+    firstCard = null;
+    matches++;
+
+    document.getElementById("memoryResult").textContent =
+      `Parejas encontradas: ${matches} / 4`;
+
+    if (matches === 4) {
+      document.getElementById("memoryResult").textContent =
+        "¡Ganaste! Muy buena memoria, Fridu. 💗";
+    }
+  } else {
+    lockBoard = true;
+    const previous = firstCard;
+    firstCard = null;
+
+    setTimeout(() => {
+      previous.textContent = "?";
+      card.textContent = "?";
+      lockBoard = false;
+    }, 800);
+  }
+}
+
+newMemoryGame();
+
+const fortunes = [
+  "Hoy te espera algo bonito. 🌷",
+  "No olvides lo increíble que eres. 💗",
+  "Que nunca te falten motivos para reír. ✨",
+  "Se vienen nuevas aventuras. 🚲",
+  "Hoy es un buen día para consentirte. 🎀",
+  "Te mando un montón de buenas vibras. 🖤"
+];
+
+function getFortune() {
+  const random = fortunes[Math.floor(Math.random() * fortunes.length)];
+  document.getElementById("fortune").textContent = random;
+}
+
+let trapCount = 0;
+
+function trap() {
+  trapCount++;
+
+  const messages = [
+    "TE DIJE QUE NO LO PICARAS JAJAJA 😭",
+    "Frida, ¿por qué no haces caso? 🤨",
+    "Bueno, ya vi que eres curiosa JAJAJA.",
+    "Última advertencia... o no. :b",
+    "Ya, ya, ganaste. Feliz cumpleaños. 💗"
+  ];
+
+  document.getElementById("trapResult").textContent =
+    messages[Math.min(trapCount - 1, messages.length - 1)];
+}
+
+const randomMessages = [
+  "Espero que hoy tengas un día increíble. 💗",
+  "Nunca dejes de hacer las cosas que te gustan.",
+  "Que se cumplan muchas de tus metas. ✨",
+  "No olvides disfrutar cada pequeña cosa.",
+  "Te deseo muchas aventuras bonitas. 🚲",
+  "Sigue siendo tú, Fridu. :3",
+  "Un abrazo a la distancia. 🖤"
+];
+
+function randomMessage() {
+  const message =
+    randomMessages[Math.floor(Math.random() * randomMessages.length)];
+
+  document.getElementById("randomMessage").textContent = message;
+}
+
+function updateCountdown() {
+  const birthday = new Date(2026, 10, 12, 0, 0, 0);
+  const now = new Date();
+  const difference = birthday - now;
+
+  const element = document.getElementById("countdown");
+
+  if (difference <= 0) {
+    element.textContent = "¡ES HOY! 🎂";
+    return;
+  }
+
+  const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((difference / (1000 * 60)) % 60);
+  const seconds = Math.floor((difference / 1000) % 60);
+
+  element.textContent =
+    `${days}d ${hours}h ${minutes}m ${seconds}s`;
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+let audioContext;
+
+function playMelody() {
+  const AudioContextClass =
+    window.AudioContext || window.webkitAudioContext;
+
+  if (!AudioContextClass) {
+    alert("Tu navegador no permite reproducir esta melodía.");
+    return;
+  }
+
+  if (!audioContext) audioContext = new AudioContextClass();
+
+  audioContext.resume();
+
+  const notes = [
+    [523.25, 0], [659.25, .25], [783.99, .5],
+    [659.25, .8], [587.33, 1.1], [523.25, 1.4],
+    [659.25, 1.8], [783.99, 2.1], [1046.5, 2.5]
+  ];
+
+  notes.forEach(([frequency, time]) => {
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+
+    oscillator.type = "sine";
+    oscillator.frequency.value = frequency;
+
+    gain.gain.setValueAtTime(.0001, audioContext.currentTime + time);
+    gain.gain.exponentialRampToValueAtTime(
+      .12, audioContext.currentTime + time + .03
+    );
+    gain.gain.exponentialRampToValueAtTime(
+      .0001, audioContext.currentTime + time + .3
+    );
+
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+
+    oscillator.start(audioContext.currentTime + time);
+    oscillator.stop(audioContext.currentTime + time + .32);
+  });
+}
+
+function celebrate() {
+  const container = document.getElementById("confetti");
+  container.innerHTML = "";
+
+  for (let i = 0; i < 90; i++) {
+    const piece = document.createElement("span");
+    piece.textContent = ["💗", "🎀", "✨", "🌸"][i % 4];
+
+    piece.style.position = "absolute";
+    piece.style.left = Math.random() * 100 + "vw";
+    piece.style.top = "-30px";
+    piece.style.fontSize = (15 + Math.random() * 18) + "px";
+    piece.style.transition = (2 + Math.random() * 3) + "s linear";
+    container.appendChild(piece);
+
+    requestAnimationFrame(() => {
+      piece.style.transform =
+        `translateY(${window.innerHeight + 60}px) rotate(${Math.random() * 700}deg)`;
+    });
+  }
+
+  setTimeout(() => container.innerHTML = "", 5500);
+}
+</script>
+</body>
+</html>
