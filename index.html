@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Fridu ♡</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Trebuchet MS',sans-serif;
+  background:linear-gradient(160deg,#ffe5f0,#f4e6ff,#fff0e5);
+  color:#704c68;
+  text-align:center;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+main{max-width:500px;margin:auto;padding:35px 20px}
+.card{
+  background:#ffffffc9;
+  border:2px solid white;
+  border-radius:28px;
+  padding:28px 20px;
+  margin:22px 0;
+  box-shadow:0 8px 25px #a66c8b20;
+}
+h1{font-size:42px;margin:12px 0;color:#d66e9e}
+h2{color:#cb79a2}
+p{line-height:1.7}
+button{
+  border:0;
+  border-radius:30px;
+  background:#e58bb5;
+  color:white;
+  padding:14px 23px;
+  font-size:16px;
+  font-weight:bold;
+  margin:8px;
+  cursor:pointer;
+  box-shadow:0 4px 12px #d88db455;
+}
+button:active{transform:scale(.95)}
+.emoji{font-size:65px;margin:10px}
+.hidden{display:none}
+.small{font-size:13px;opacity:.7}
+.heart{font-size:22px;animation:float 2s infinite alternate}
+@keyframes float{
+  to{transform:translateY(-12px) rotate(10deg)}
+}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:10}
+.secret{
+  background:#fff1f7;
+  padding:15px;
+  border-radius:18px;
+  margin:12px 0;
+}
+footer{padding:30px;font-size:13px}
+</style>
+</head>
+
+<body>
+<canvas id="confetti"></canvas>
+
+<main>
+
+<div class="heart">♡ ✨ ♡</div>
+<p class="small">UNA PEQUEÑA SORPRESA PARA ALGUIEN ESPECIAL</p>
+
+<section class="card">
+  <div class="emoji">🎀</div>
+  <h1>¡Feliz cumpleaños, Fridu!</h1>
+  <p>
+    ¡ALTO! 🚨<br>
+    Has encontrado una página muy sospechosa...
+    aparentemente fue creada exclusivamente para ti.
+  </p>
+  <p>¿Estás lista para descubrir qué hay aquí?</p>
+  <button onclick="abrir()">ABRIR MI REGALO 🎁</button>
+</section>
+
+<section id="regalo" class="hidden">
+
+  <div class="card">
+    <div class="emoji">🎂</div>
+    <h2>¡Es hora de celebrar!</h2>
+    <p>
+      Este pastel es virtual porque todavía no
+      descubrí cómo enviar pasteles por internet JAJAJA.
+    </p>
+    <button onclick="velitas()">APAGAR LAS VELITAS 🕯️</button>
+    <p id="vela"></p>
+  </div>
+
+  <div class="card">
+    <div class="emoji">🕵️‍♀️</div>
+    <h2>Un pequeño interrogatorio</h2>
+    <p>¿Qué se supone que debes hacer hoy?</p>
+    <button onclick="respuesta(1)">Estudiar 😭</button>
+    <button onclick="respuesta(2)">Dormir 🛌</button>
+    <button onclick="respuesta(3)">Disfrutar mi cumpleaños 🎉</button>
+    <p id="quiz"></p>
+  </div>
+
+  <div class="card">
+    <div class="emoji">🔐</div>
+    <h2>Mensajes secretos</h2>
+    <p>Hay tres pequeños mensajes escondidos para ti.</p>
+    <button onclick="secreto(1)">Secreto 1 💌</button>
+    <button onclick="secreto(2)">Secreto 2 💗</button>
+    <button onclick="secreto(3)">Secreto 3 ✨</button>
+    <div id="mensaje"></div>
+  </div>
+
+  <div class="card">
+    <div class="emoji">💌</div>
+    <h2>Una última cosita...</h2>
+    <p>He preparado algo más para ti.</p>
+    <button onclick="carta()">ABRIR CARTA ♡</button>
+    <div id="carta" class="hidden">
+      <div class="secret">
+        <h2>Querida Fridu:</h2>
+        <p>
+          ¡Feliz cumpleaños! 🥳
+          Espero que hoy tengas un día increíble,
+          que te diviertas muchísimo y que recibas
+          muchas cosas bonitas.
+        </p>
+        <p>
+          Quería hacerte algo diferente y que
+          tuvieras un pequeño recuerdo de este día.
+          Así que aquí está mi humilde obra de arte
+          JAJAJA.
+        </p>
+        <p>
+          Gracias por tu amistad y por ser tú.
+          Nunca dejes de ser esa personita tan especial.
+        </p>
+        <h2>Con cariño, de alguien que te aprecia ♡</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>¡FELIZ CUMPLEAÑOS! 🥳</h2>
+    <div class="emoji">🎉🎂🎀</div>
+    <p>Fin del recorrido... por ahora. ♡</p>
+    <button onclick="fiesta()">¡OTRA VEZ! 🎊</button>
+  </div>
+
+</section>
+
+<footer>
+  Hecho con cariño y un poquito de locura ♡
+  <br>© Un pequeño regalo para Fridu
+</footer>
+</main>
+
+<script>
+function abrir(){
+  document.getElementById('regalo').classList.remove('hidden');
+  fiesta();
+  document.getElementById('regalo').scrollIntoView({behavior:'smooth'});
+}
+
+function velitas(){
+  document.getElementById('vela').innerText=
+  '¡Deseo concedido! Bueno... tú tienes que pedirlo primero JAJAJA 💗';
+  fiesta();
+}
+
+function respuesta(n){
+  const r=document.getElementById('quiz');
+  r.innerText=n===3
+  ?'¡RESPUESTA CORRECTA! 🎉 Hoy la protagonista eres tú.'
+  :'Respuesta incorrecta. Se te recuerda que hoy es tu día JAJAJA 😭';
+}
+
+function secreto(n){
+  const m=[
+    'Secreto 1: Mereces muchísimas cosas bonitas. 💗',
+    'Secreto 2: Espero que nunca te falten motivos para sonreír. ✨',
+    'Secreto 3: Esta página fue hecha especialmente para ti. 🎀'
+  ];
+  document.getElementById('mensaje').innerHTML=
+  '<div class="secret">'+m[n-1]+'</div>';
+}
+
+function carta(){
+  document.getElementById('carta').classList.toggle('hidden');
+}
+
+function fiesta(){
+  const c=document.getElementById('confetti');
+  const ctx=c.getContext('2d');
+  c.width=innerWidth;
+  c.height=innerHeight;
+  const pieces=[];
+  for(let i=0;i<130;i++){
+    pieces.push({
+      x:Math.random()*c.width,
+      y:-Math.random()*c.height,
+      s:Math.random()*7+3,
+      v:Math.random()*4+2,
+      color:['#ed91bb','#b99bea','#f6c66c','#ffffff'][Math.floor(Math.random()*4)]
+    });
+  }
+  let frame=0;
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    pieces.forEach(p=>{
+      p.y+=p.v;
+      p.x+=Math.sin(p.y/20);
+      ctx.fillStyle=p.color;
+      ctx.fillRect(p.x,p.y,p.s,p.s);
+    });
+    frame++;
+    if(frame<140)requestAnimationFrame(draw);
+    else ctx.clearRect(0,0,c.width,c.height);
+  }
+  draw();
+}
+</script>
+</body>
+</html>
