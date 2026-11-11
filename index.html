@@ -6,357 +6,818 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#09070b">
 <title>Un detalle para Fridu ♡</title>
+
 <style>
-:root{--pink:#f5a9c8;--light:#ffe1ed;--dark:#09070b;--panel:#17121a;--muted:#b9aab5}
-*{box-sizing:border-box}
-body{margin:0;min-height:100vh;background:radial-gradient(circle at top,#392033 0%,transparent 45%),var(--dark);color:#fff;font-family:"Trebuchet MS",Arial,sans-serif}
-button{border:0;border-radius:15px;padding:13px 19px;margin:7px 4px;background:var(--pink);color:#24131c;font-size:15px;font-weight:bold;cursor:pointer;transition:.2s}
-button:hover{transform:scale(1.03)}
-button:disabled{opacity:.45;cursor:not-allowed;transform:none}
-#gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:22px}
-.gate-panel{width:100%;max-width:560px;background:rgba(23,18,26,.96);border:1px solid #76516a;border-radius:27px;padding:35px 24px;text-align:center;box-shadow:0 15px 50px #0008}
-.gate-icon{font-size:55px}
-.gate-title{color:var(--pink);font-size:clamp(28px,7vw,42px);margin:15px 0}
-#gateCountdown{font-size:clamp(27px,7vw,39px);font-weight:bold;color:var(--light);margin:24px 0}
-.gate-small{color:var(--muted);font-size:14px;line-height:1.6}
-#app{display:none;width:100%;max-width:650px;margin:0 auto;padding:22px}
-.top{display:flex;justify-content:space-between;color:var(--muted);font-size:13px;margin-bottom:12px}
-.progress{height:6px;background:#30232e;border-radius:20px;overflow:hidden;margin-bottom:22px}
-#progressBar{width:6.25%;height:100%;background:var(--pink);transition:width .35s}
-.screen{display:none;animation:appear .4s ease}
-.screen.active{display:block}
-@keyframes appear{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.panel{background:rgba(23,18,26,.94);border:1px solid #543447;border-radius:25px;padding:30px 23px;text-align:center;box-shadow:0 15px 50px #0008}
-h1{font-size:clamp(30px,8vw,48px);margin:12px 0;color:var(--light)}
-h2{color:var(--pink);font-size:27px}
-p{line-height:1.65;color:#eadde5}
-.muted{color:var(--muted);font-size:14px}
-.emoji{font-size:48px;margin:12px}
-.bigNumber{font-size:35px;font-weight:bold;color:var(--pink);margin:20px 0}
-.secondary{background:#30232e;color:white;border:1px solid #76516a}
-.nav{display:flex;justify-content:space-between;margin-top:20px}
-.nav button{min-width:115px}
-.choice{display:block;width:100%;background:#30232e;color:white;border:1px solid #76516a}
-.result{min-height:35px;color:var(--pink);font-weight:bold;margin-top:15px}
-.gift{background:#30232e;border:1px solid #76516a;border-radius:18px;padding:15px;margin:12px 0;cursor:pointer}
-.gift:hover{border-color:var(--pink)}
-.hiddenText{display:none;color:var(--light);margin-top:12px}
-.memoryGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:20px}
-.memoryCard{aspect-ratio:1;font-size:25px;padding:5px;margin:0;background:#30232e;color:white;border:1px solid #76516a}
-.memoryCard.matched{background:#68465b;border-color:var(--pink)}
-.gallery{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.photo-card{background:#30232e;border:1px solid #76516a;border-radius:17px;padding:8px;overflow:hidden}
-.photo-card img{width:100%;height:230px;object-fit:cover;border-radius:12px;display:block}
-.photo-card.wide{grid-column:1/-1}
-.photo-card.wide img{height:auto;max-height:560px;object-fit:contain;background:#100d12}
-.photo-caption{color:var(--light);font-size:13px;padding:8px 3px 3px}
-a{color:var(--pink);overflow-wrap:anywhere}
-.letter{text-align:left;background:#211923;border-radius:17px;padding:20px;line-height:1.8}
-footer{text-align:center;color:var(--muted);font-size:12px;margin-top:20px}
-#confetti{position:fixed;inset:0;pointer-events:none;z-index:10}
-.song-link{display:block;background:#30232e;border:1px solid #76516a;border-radius:15px;padding:14px;margin:12px 0;text-decoration:none}
-.song-link strong{display:block;color:var(--light);margin-bottom:5px}
-@media(max-width:400px){#app{padding:13px}.panel{padding:24px 16px}.photo-card img{height:175px}}
+:root {
+  --pink:#f5a9c8;
+  --light:#ffe1ed;
+  --dark:#09070b;
+  --panel:#17121a;
+  --muted:#b9aab5;
+}
+* {box-sizing:border-box}
+body {
+  margin:0;
+  min-height:100vh;
+  background:radial-gradient(circle at top,#392033 0%,transparent 45%),var(--dark);
+  color:white;
+  font-family:"Trebuchet MS",Arial,sans-serif;
+}
+button {
+  border:0;
+  border-radius:15px;
+  padding:13px 19px;
+  margin:7px 4px;
+  background:var(--pink);
+  color:#24131c;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer;
+}
+button:disabled {opacity:.45;cursor:not-allowed}
+#gate {
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:22px;
+}
+.gate-panel {
+  width:100%;
+  max-width:560px;
+  background:var(--panel);
+  border:1px solid #76516a;
+  border-radius:27px;
+  padding:35px 24px;
+  text-align:center;
+}
+.gate-title {color:var(--pink)}
+#gateCountdown {
+  font-size:clamp(27px,7vw,39px);
+  font-weight:bold;
+  color:var(--light);
+  margin:24px 0;
+}
+.gate-small,.muted {color:var(--muted)}
+#app {
+  display:none;
+  width:100%;
+  max-width:650px;
+  margin:0 auto;
+  padding:22px;
+}
+.top {
+  display:flex;
+  justify-content:space-between;
+  color:var(--muted);
+  font-size:13px;
+  margin-bottom:12px;
+}
+.progress {
+  height:6px;
+  background:#30232e;
+  border-radius:20px;
+  overflow:hidden;
+  margin-bottom:22px;
+}
+#progressBar {
+  height:100%;
+  width:0;
+  background:var(--pink);
+  transition:width .35s;
+}
+.screen {display:none;animation:appear .35s ease}
+.screen.active {display:block}
+@keyframes appear {
+  from {opacity:0;transform:translateY(12px)}
+  to {opacity:1;transform:translateY(0)}
+}
+.panel {
+  background:rgba(23,18,26,.96);
+  border:1px solid #543447;
+  border-radius:25px;
+  padding:30px 23px;
+  text-align:center;
+  box-shadow:0 15px 50px #0008;
+}
+h1 {
+  font-size:clamp(30px,8vw,48px);
+  color:var(--light);
+}
+h2 {color:var(--pink);font-size:27px}
+p {line-height:1.65;color:#eadde5}
+.emoji {font-size:48px;margin:12px}
+.bigNumber {
+  font-size:35px;
+  font-weight:bold;
+  color:var(--pink);
+  margin:20px 0;
+}
+.secondary {
+  background:#30232e;
+  color:white;
+  border:1px solid #76516a;
+}
+.nav {
+  display:flex;
+  justify-content:space-between;
+  margin-top:20px;
+}
+.nav button {min-width:115px}
+.choice {
+  display:block;
+  width:100%;
+  background:#30232e;
+  color:white;
+  border:1px solid #76516a;
+}
+.result {
+  min-height:35px;
+  color:var(--pink);
+  font-weight:bold;
+  margin-top:15px;
+}
+.gift {
+  background:#30232e;
+  border:1px solid #76516a;
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  cursor:pointer;
+}
+.hiddenText {
+  display:none;
+  color:var(--light);
+  margin-top:12px;
+}
+.memoryGrid {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:9px;
+  margin-top:20px;
+}
+.memoryCard {
+  aspect-ratio:1;
+  font-size:25px;
+  padding:5px;
+  margin:0;
+  background:#30232e;
+  color:white;
+  border:1px solid #76516a;
+}
+.memoryCard.matched {
+  background:#68465b;
+  border-color:var(--pink);
+}
+.gallery {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.photo-card {
+  background:#30232e;
+  border:1px solid #76516a;
+  border-radius:17px;
+  padding:8px;
+  overflow:hidden;
+}
+.photo-card img {
+  width:100%;
+  height:230px;
+  object-fit:cover;
+  border-radius:12px;
+  display:block;
+}
+.photo-card.wide {grid-column:1/-1}
+.photo-card.wide img {
+  height:auto;
+  max-height:560px;
+  object-fit:contain;
+  background:#100d12;
+}
+.photo-caption {
+  color:var(--light);
+  font-size:13px;
+  padding:8px 3px 3px;
+}
+a {
+  color:var(--pink);
+  overflow-wrap:anywhere;
+}
+.song-link {
+  display:block;
+  background:#30232e;
+  border:1px solid #76516a;
+  border-radius:15px;
+  padding:14px;
+  margin:12px 0;
+  text-decoration:none;
+}
+.song-link strong {
+  display:block;
+  color:var(--light);
+  margin-bottom:5px;
+}
+.letter {
+  text-align:left;
+  background:#211923;
+  border-radius:17px;
+  padding:20px;
+  line-height:1.8;
+}
+footer {
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+  margin-top:20px;
+}
+#confetti {
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:10;
+}
+@media(max-width:400px) {
+  #app {padding:13px}
+  .panel {padding:24px 16px}
+  .photo-card img {height:175px}
+}
 </style>
 </head>
+
 <body>
+
+<!-- PANTALLA DE BLOQUEO -->
 <div id="gate">
   <div class="gate-panel">
-    <div class="gate-icon">🔒</div>
+    <div class="emoji">🔒</div>
     <h1 class="gate-title">Una sorpresa está esperando...</h1>
     <p>Este pequeño espacio todavía está cerrado.</p>
     <div id="gateCountdown">Calculando...</div>
-    <p class="gate-small">Hay detalles que tienen su momento. ♡<br>Vuelve el 12 de noviembre.</p>
+    <p class="gate-small">
+      Hay detalles que tienen su momento. ♡<br>
+      Vuelve el 12 de noviembre.
+    </p>
     <div class="emoji">🖤💗</div>
   </div>
 </div>
 
 <div id="confetti"></div>
+
 <main id="app">
-  <div class="top"><span>Un detalle para Fridu ♡</span><span id="counter">1 / 16</span></div>
-  <div class="progress"><div id="progressBar"></div></div>
 
-  <!-- 1 BIENVENIDA -->
-  <section class="screen active"><div class="panel">
-    <div class="emoji">🎀</div><p class="muted">Hay algo que quiero enseñarte...</p>
-    <h1>¡Hola, Fridu!</h1>
-    <p>Preparé algo especialmente para ti. No es un regalo común, así que tendrás que descubrirlo poquito a poquito. :b</p>
-    <p>¿Estás lista?</p><div class="emoji">💗</div>
-  </div></section>
+<div class="top">
+  <span>Un detalle para Fridu ♡</span>
+  <span id="counter">1 / 16</span>
+</div>
 
-  <!-- 2 CUMPLEAÑOS -->
-  <section class="screen"><div class="panel">
-    <div class="emoji">🎂</div><h2>¡Llegó tu día!</h2>
-    <p>Hoy es una fecha especial y preparé algunas cositas para ti.</p>
-    <div class="bigNumber">12 · 11 · 2026</div>
-    <p class="muted">Ahora sí... comienza la sorpresa. ♡</p>
-  </div></section>
+<div class="progress">
+  <div id="progressBar"></div>
+</div>
 
-  <!-- 3 REGALITOS -->
-  <section class="screen"><div class="panel">
-    <div class="emoji">🎁</div><h2>Tres regalitos para ti</h2>
-    <p>Abre cada uno. No tienen envoltura, pero sí intención. :b</p>
-    <div class="gift" onclick="reveal('gift1')">🎁 Regalo número 1<div class="hiddenText" id="gift1">Un deseo: que tengas muchísimos motivos para sonreír. 💗</div></div>
-    <div class="gift" onclick="reveal('gift2')">🎁 Regalo número 2<div class="hiddenText" id="gift2">Un recordatorio: eres una persona única y mereces cosas bonitas.</div></div>
-    <div class="gift" onclick="reveal('gift3')">🎁 Regalo número 3<div class="hiddenText" id="gift3">Un montón de buenas vibras para todo lo que viene. ✨</div></div>
-  </div></section>
+<!-- 1 -->
+<section class="screen active">
+<div class="panel">
+  <div class="emoji">🎀</div>
+  <p class="muted">Hay algo que quiero enseñarte...</p>
+  <h1>¡Hola, Fridu!</h1>
+  <p>Preparé algo especialmente para ti. No es un regalo común, así que tendrás que descubrirlo poquito a poquito. :b</p>
+  <p>¿Estás lista?</p>
+  <div class="emoji">💗</div>
+</div>
+</section>
 
-  <!-- 4 QUIZ -->
-  <section class="screen"><div class="panel">
-    <div class="emoji">🧠</div><h2>Pequeño examen</h2><p>¿Cuáles son tus colores favoritos?</p>
-    <button class="choice" onclick="quiz(false)">Azul y amarillo</button>
-    <button class="choice" onclick="quiz(true)">Negro y rosa clarito</button>
-    <button class="choice" onclick="quiz(false)">Verde y morado</button>
-    <div class="result" id="quizResult"></div>
-  </div></section>
+<!-- 2 -->
+<section class="screen">
+<div class="panel">
+  <div class="emoji">🎂</div>
+  <h2>¡Llegó tu día!</h2>
+  <p>Hoy es una fecha especial y preparé algunas cositas para ti.</p>
+  <div class="bigNumber">12 · 11 · 2026</div>
+  <p class="muted">Ahora sí... comienza la sorpresa. ♡</p>
+</div>
+</section>
 
-  <!-- 5 MEMORIA -->
-  <section class="screen"><div class="panel">
-    <div class="emoji">🃏</div><h2>Encuentra las parejas</h2><p>Un pequeño juego para poner a trabajar esa memoria JAJAJA.</p>
-    <div class="memoryGrid" id="memoryGrid"></div>
-    <div class="result" id="memoryResult">Parejas encontradas: 0 / 4</div>
-    <button class="secondary" onclick="newMemoryGame()">Reiniciar juego</button>
-  </div></section>
+<!-- 3 -->
+<section class="screen">
+<div class="panel">
+  <div class="emoji">🎁</div>
+  <h2>Tres regalitos para ti</h2>
+  <p>Abre cada uno. No tienen envoltura, pero sí intención. :b</p>
 
-  <!-- 6 SUERTE -->
-  <section class="screen"><div class="panel">
-    <div class="emoji">🔮</div><h2>Máquina de buenos deseos</h2><p>Presiona el botón y descubre qué te toca hoy.</p>
-    <div class="bigNumber" id="fortune">♡</div><button onclick="getFortune()">Descubrir mi suerte</button>
-  </div></section>
-
-  <!-- 7 ABURRIMIENTO -->
-  <section class="screen"><div class="panel">
-    <div class="emoji">🌷</div><h2>Abre esto cuando estés aburrida</h2>
-    <p>Porque no todo en la vida puede ser estar acostada viendo el celular JAJAJA.</p>
-    <button onclick="reveal('bored')">Abrir mensajito</button>
-    <div class="hiddenText" id="bored">Misión del día: escucha una canción que te guste, sal un ratito, disfruta algo rico y recuerda que alguien se tomó el tiempo de hacerte esta página. :3</div>
-  </div></section>
-
-  <!-- 8 BOTON TRAMPA -->
-  <section class="screen"><div class="panel">
-    <div class="emoji">🤨</div><h2>NO ME PIQUES</h2><p>En serio, Frida. No presiones el botón.</p>
-    <button onclick="trap()">NO TOCAR</button><div class="result" id="trapResult"></div>
-  </div></section>
-
-  <!-- 9 GALERIA -->
-  <section class="screen"><div class="panel">
-    <div class="emoji">📸</div><h2>Unas fotitos de Fridu</h2>
-    <p>Porque algunos momentos merecen quedarse guardados. 💗</p>
-    <div class="gallery">
-      <div class="photo-card"><img src="foto1.jpg" alt="Foto de Frida 1"><div class="photo-caption">♡</div></div>
-      <div class="photo-card"><img src="foto2.jpg" alt="Foto de Frida 2"><div class="photo-caption">🌸</div></div>
-      <div class="photo-card"><img src="foto3.jpg" alt="Foto de Frida 3"><div class="photo-caption">🎀</div></div>
-      <div class="photo-card"><img src="foto4.jpg" alt="Foto de Frida 4"><div class="photo-caption">✨</div></div>
-      <div class="photo-card wide"><img src="ilustracion.jpg" alt="Ilustración de Frida y Dono juntos"><div class="photo-caption">Y una foto que todavía no teníamos... así que tocó dibujarla. JAJAJA ♡</div></div>
-    </div>
-  </div></section>
-
-  <!-- 10 MUSICA -->
-  <section class="screen"><div class="panel">
-    <div class="emoji">🎧</div><h2>Su soundtrack</h2>
-    <p>Porque también hay canciones que dicen un poquito de nosotros... o al menos que te encantan a ti JAJAJA.</p>
-    <a class="song-link" href="https://open.spotify.com/search/ASTROTHUNDER%20Travis%20Scott" target="_blank" rel="noopener"><strong>ASTROTHUNDER</strong><span>Travis Scott · Abrir en Spotify ♡</span></a>
-    <a class="song-link" href="https://open.spotify.com/search/COFFEE%20BEAN%20Travis%20Scott" target="_blank" rel="noopener"><strong>COFFEE BEAN</strong><span>Travis Scott · Abrir en Spotify ♡</span></a>
-    <p class="muted">Y también te dejo una melodía especial de cumpleaños:</p>
-    <button onclick="playMelody()">▶ Reproducir Happy Birthday</button>
-  </div></section>
-
-  <!-- 11 DATOS -->
-  <section class="screen"><div class="panel">
-    <div class="emoji">🌷</div><h2>Datos de una Fridu</h2>
-    <p>Una pequeña ficha de la cumpleañera:</p>
-    <p>🖤 Color favorito: negro</p><p>🌸 Otro color favorito: rosa clarito</p>
-    <p>🚲 Le gusta andar en bicicleta</p><p>🏋️ Le gusta ir al gimnasio</p>
-    <p class="muted">Y seguramente hay muchas cosas más que todavía me falta descubrir.</p>
-  </div></section>
-
-  <!-- 12 UN MES -->
-  <section class="screen"><div class="panel">
-    <div class="emoji">♡</div><h2>Un mes de conocernos...</h2>
-    <p class="muted">Bueno, aproximadamente JAJAJA</p>
-    <div class="bigNumber">≈ 1 MES</div>
-    <p>No sabemos exactamente cuándo empezamos a hablar, pero sí sabemos que por aquí ya llevamos aproximadamente un mes JAJAJA.</p>
-    <p>Y quién sabe cuántas conversaciones, risas y ocurrencias nos esperan todavía. :3</p>
-    <div class="emoji">💗</div><p class="muted">Y esto apenas comienza.</p><p>— Dono ♡</p>
-  </div></section>
-
-  <!-- 13 MENSAJES -->
-  <section class="screen"><div class="panel">
-    <div class="emoji">💌</div><h2>Mensajitos aleatorios</h2><p>Presiona para recibir uno diferente.</p>
-    <div class="bigNumber" style="font-size:24px" id="randomMessage">♡</div>
-    <button onclick="randomMessage()">Otro mensajito</button>
-  </div></section>
-
-  <!-- 14 CARTA -->
-  <section class="screen"><div class="panel">
-    <div class="emoji">✉️</div><h2>Una pequeña carta</h2>
-    <div class="letter">
-      <p>Hola, Fridu. 💗</p>
-      <p>Quería hacer algo diferente para tu cumpleaños. Aunque estemos lejos, quería tener un detallito contigo y hacerte saber que me da gusto haberte conocido.</p>
-      <p>Espero que este nuevo año de vida venga lleno de experiencias bonitas, nuevas aventuras, risas y muchas cosas que te hagan feliz.</p>
-      <p>Gracias por las conversaciones, las ocurrencias y por formar parte de mis días.</p>
-      <p>¡Feliz cumpleaños, Fridu! :3</p>
-      <p>— Dono ♡</p>
-    </div>
-  </div></section>
-
-  <!-- 15 DEDICATORIA -->
-  <section class="screen"><div class="panel">
-    <div class="emoji">🎀</div><h2>Esto es especialmente para ti</h2>
-    <p>Esto lo hice especialmente para ti Fridu :b cada detalle está aquí porque quería regalarte algo aunque fuera a distancia :v</p>
-    <div class="emoji">🖤💗</div><p>De parte de Dono</p>
-  </div></section>
-
-  <!-- 16 FINAL -->
-  <section class="screen"><div class="panel">
-    <div class="emoji">🎉</div><h1>¡Feliz cumpleaños, Fridu!</h1>
-    <p>Espero que tu día sea tan bonito como tú y que este nuevo año esté lleno de cosas increíbles.</p>
-    <div class="bigNumber">12 · 11 · 2026</div>
-    <p>Gracias por llegar hasta el final de este pequeño regalo.</p>
-    <div class="emoji">🖤💗</div><h2>Con cariño, Dono ♡</h2>
-    <button onclick="celebrate()">¡Celebrar! 🎊</button>
-    <p class="muted">Fin... ¿o el comienzo de más historias? :b</p>
-  </div></section>
-
-  <div class="nav">
-    <button class="secondary" id="prev" onclick="changeScreen(-1)" disabled>← Anterior</button>
-    <button id="next" onclick="changeScreen(1)">Siguiente →</button>
+  <div class="gift" onclick="reveal('gift1')">
+    🎁 Regalo número 1
+    <div class="hiddenText" id="gift1">Un deseo: que tengas muchísimos motivos para sonreír. 💗</div>
   </div>
-  <footer>Hecho con ♡ por Dono, especialmente para Fridu.</footer>
+
+  <div class="gift" onclick="reveal('gift2')">
+    🎁 Regalo número 2
+    <div class="hiddenText" id="gift2">Un recordatorio: eres una persona única y mereces cosas bonitas.</div>
+  </div>
+
+  <div class="gift" onclick="reveal('gift3')">
+    🎁 Regalo número 3
+    <div class="hiddenText" id="gift3">Un montón de buenas vibras para todo lo que viene. ✨</div>
+  </div>
+</div>
+</section>
+
+<!-- 4 -->
+<section class="screen">
+<div class="panel">
+  <div class="emoji">🧠</div>
+  <h2>Pequeño examen</h2>
+  <p>¿Cuáles son tus colores favoritos?</p>
+  <button class="choice" onclick="quiz(false)">Azul y amarillo</button>
+  <button class="choice" onclick="quiz(true)">Negro y rosa clarito</button>
+  <button class="choice" onclick="quiz(false)">Verde y morado</button>
+  <div class="result" id="quizResult"></div>
+</div>
+</section>
+
+<!-- 5 -->
+<section class="screen">
+<div class="panel">
+  <div class="emoji">🃏</div>
+  <h2>Encuentra las parejas</h2>
+  <p>Un pequeño juego para poner a trabajar esa memoria JAJAJA.</p>
+  <div class="memoryGrid" id="memoryGrid"></div>
+  <div class="result" id="memoryResult">Parejas encontradas: 0 / 4</div>
+  <button class="secondary" onclick="newMemoryGame()">Reiniciar juego</button>
+</div>
+</section>
+
+<!-- 6 -->
+<section class="screen">
+<div class="panel">
+  <div class="emoji">🔮</div>
+  <h2>Máquina de buenos deseos</h2>
+  <p>Presiona el botón y descubre qué te toca hoy.</p>
+  <div class="bigNumber" id="fortune">♡</div>
+  <button onclick="getFortune()">Descubrir mi suerte</button>
+</div>
+</section>
+
+<!-- 7 -->
+<section class="screen">
+<div class="panel">
+  <div class="emoji">🌷</div>
+  <h2>Abre esto cuando estés aburrida</h2>
+  <p>Porque no todo en la vida puede ser estar acostada viendo el celular JAJAJA.</p>
+  <button onclick="reveal('bored')">Abrir mensajito</button>
+  <div class="hiddenText" id="bored">
+    Misión del día: escucha una canción que te guste, sal un ratito, disfruta algo rico y recuerda que alguien se tomó el tiempo de hacerte esta página. :3
+  </div>
+</div>
+</section>
+
+<!-- 8 -->
+<section class="screen">
+<div class="panel">
+  <div class="emoji">🤨</div>
+  <h2>NO ME PIQUES</h2>
+  <p>En serio, Frida. No presiones el botón.</p>
+  <button onclick="trap()">NO TOCAR</button>
+  <div class="result" id="trapResult"></div>
+</div>
+</section>
+
+<!-- 9 GALERÍA -->
+<section class="screen">
+<div class="panel">
+  <div class="emoji">📸</div>
+  <h2>Unas fotitos de Fridu</h2>
+  <p>Porque algunos momentos merecen quedarse guardados. 💗</p>
+
+  <div class="gallery">
+    <div class="photo-card">
+      <img src="foto1.jpg" alt="Foto de Frida 1">
+      <div class="photo-caption">♡</div>
+    </div>
+
+    <div class="photo-card">
+      <img src="foto2.jpg" alt="Foto de Frida 2">
+      <div class="photo-caption">🌸</div>
+    </div>
+
+    <div class="photo-card">
+      <img src="foto3.jpg" alt="Foto de Frida 3">
+      <div class="photo-caption">🎀</div>
+    </div>
+
+    <div class="photo-card">
+      <img src="foto4.jpg" alt="Foto de Frida 4">
+      <div class="photo-caption">✨</div>
+    </div>
+
+    <div class="photo-card wide">
+      <img src="ilustracion.jpg" alt="Ilustración de Frida y Dono juntos">
+      <div class="photo-caption">
+        Y una foto que todavía no teníamos... así que tocó dibujarla. JAJAJA ♡
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- 10 MÚSICA -->
+<section class="screen">
+<div class="panel">
+  <div class="emoji">🎧</div>
+  <h2>Su soundtrack</h2>
+  <p>Porque también hay canciones que dicen un poquito de nosotros... o al menos que te encantan a ti JAJAJA.</p>
+
+  <a class="song-link"
+     href="https://open.spotify.com/search/ASTROTHUNDER%20Travis%20Scott"
+     target="_blank" rel="noopener">
+    <strong>ASTROTHUNDER</strong>
+    <span>Travis Scott · Abrir en Spotify ♡</span>
+  </a>
+
+  <a class="song-link"
+     href="https://open.spotify.com/search/COFFEE%20BEAN%20Travis%20Scott"
+     target="_blank" rel="noopener">
+    <strong>COFFEE BEAN</strong>
+    <span>Travis Scott · Abrir en Spotify ♡</span>
+  </a>
+
+  <p class="muted">Y también te dejo una melodía especial de cumpleaños:</p>
+  <button onclick="playMelody()">▶ Reproducir Happy Birthday</button>
+</div>
+</section>
+
+<!-- 11 -->
+<section class="screen">
+<div class="panel">
+  <div class="emoji">🌷</div>
+  <h2>Datos de una Fridu</h2>
+  <p>Una pequeña ficha de la cumpleañera:</p>
+  <p>🖤 Color favorito: negro</p>
+  <p>🌸 Otro color favorito: rosa clarito</p>
+  <p>🚲 Le gusta andar en bicicleta</p>
+  <p>🏋️ Le gusta ir al gimnasio</p>
+  <p class="muted">Y seguramente hay muchas cosas más que todavía me falta descubrir.</p>
+</div>
+</section>
+
+<!-- 12 -->
+<section class="screen">
+<div class="panel">
+  <div class="emoji">♡</div>
+  <h2>Un mes de conocernos...</h2>
+  <p class="muted">Bueno, aproximadamente JAJAJA</p>
+  <div class="bigNumber">≈ 1 MES</div>
+  <p>No sabemos exactamente cuándo empezamos a hablar, pero sí sabemos que por aquí ya llevamos aproximadamente un mes JAJAJA.</p>
+  <p>Y quién sabe cuántas conversaciones, risas y ocurrencias nos esperan todavía. :3</p>
+  <div class="emoji">💗</div>
+  <p class="muted">Y esto apenas comienza.</p>
+  <p>— Dono ♡</p>
+</div>
+</section>
+
+<!-- 13 -->
+<section class="screen">
+<div class="panel">
+  <div class="emoji">💌</div>
+  <h2>Mensajitos aleatorios</h2>
+  <p>Presiona para recibir uno diferente.</p>
+  <div class="bigNumber" style="font-size:24px" id="randomMessage">♡</div>
+  <button onclick="randomMessage()">Otro mensajito</button>
+</div>
+</section>
+
+<!-- 14 CARTA -->
+<section class="screen">
+<div class="panel">
+  <div class="emoji">✉️</div>
+  <h2>Una pequeña carta</h2>
+
+  <div class="letter">
+    <p>Hola, Fridu. 💗</p>
+
+    <p>Quería hacer algo diferente para tu cumpleaños. Aunque estemos lejos, quería tener un detallito contigo y hacerte saber que me da gusto haberte conocido.</p>
+
+    <p>Espero que este nuevo año de vida venga lleno de experiencias bonitas, nuevas aventuras, risas y muchas cosas que te hagan feliz.</p>
+
+    <p>Gracias por las conversaciones, las ocurrencias y por formar parte de mis días.</p>
+
+    <p>¡Feliz cumpleaños, Fridu! :3</p>
+
+    <p>— Dono ♡</p>
+  </div>
+</div>
+</section>
+
+<!-- 15 DEDICATORIA -->
+<section class="screen">
+<div class="panel">
+  <div class="emoji">🎀</div>
+  <h2>Esto es especialmente para ti</h2>
+  <p>Esto lo hice especialmente para ti Fridu :b cada detalle está aquí porque quería regalarte algo aunque fuera a distancia :v</p>
+  <div class="emoji">🖤💗</div>
+  <p>De parte de Dono</p>
+</div>
+</section>
+
+<!-- 16 FINAL -->
+<section class="screen">
+<div class="panel">
+  <div class="emoji">🎉</div>
+  <h1>¡Feliz cumpleaños, Fridu!</h1>
+  <p>Espero que tu día sea tan bonito como tú y que este nuevo año esté lleno de cosas increíbles.</p>
+  <div class="bigNumber">12 · 11 · 2026</div>
+  <p>Gracias por llegar hasta el final de este pequeño regalo.</p>
+  <div class="emoji">🖤💗</div>
+  <h2>Con cariño, Dono ♡</h2>
+  <button onclick="celebrate()">¡Celebrar! 🎊</button>
+  <p class="muted">Fin... ¿o el comienzo de más historias? :b</p>
+</div>
+</section>
+
+<div class="nav">
+  <button class="secondary" id="prev" onclick="changeScreen(-1)">← Anterior</button>
+  <button id="next" onclick="changeScreen(1)">Siguiente →</button>
+</div>
+
+<footer>Hecho con ♡ por Dono, especialmente para Fridu.</footer>
 </main>
 
 <script>
-// BLOQUEO HASTA EL 12 DE NOVIEMBRE DE 2026 A LAS 00:00
-// Usa la hora local del dispositivo que abre la página.
-
+// FECHA TEMPORAL PARA QUE PUEDAS REVISAR LA PÁGINA.
+// ANTES DE COMPARTIRLA, CAMBIA EL DÍA 10 POR EL 12.
 const UNLOCK_AT = new Date(2026, 10, 10, 0, 0, 0);
+
 const gate = document.getElementById("gate");
 const app = document.getElementById("app");
+const screens = document.querySelectorAll(".screen");
+let current = 0;
 
-function updateGate(){
+function showScreen() {
+  screens.forEach((screen,index) => {
+    screen.classList.toggle("active", index === current);
+  });
+
+  document.getElementById("counter").textContent =
+    `${current+1} / ${screens.length}`;
+
+  document.getElementById("progressBar").style.width =
+    `${((current+1)/screens.length)*100}%`;
+
+  document.getElementById("prev").disabled = current === 0;
+
+  document.getElementById("next").textContent =
+    current === screens.length-1
+      ? "Volver al inicio ↺"
+      : "Siguiente →";
+
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function changeScreen(direction) {
+  if (new Date() < UNLOCK_AT) return;
+
+  current = (current + direction + screens.length) % screens.length;
+  showScreen();
+}
+
+// COMPROBAR EL BLOQUEO Y EL CONTADOR
+function updateGate() {
   const diff = UNLOCK_AT - new Date();
-  if(diff <= 0){
+
+  if (diff <= 0) {
     gate.style.display = "none";
     app.style.display = "block";
-    showScreen();
     return;
   }
+
   gate.style.display = "flex";
   app.style.display = "none";
+
   const days = Math.floor(diff / 86400000);
   const hours = Math.floor((diff / 3600000) % 24);
   const minutes = Math.floor((diff / 60000) % 60);
   const seconds = Math.floor((diff / 1000) % 60);
+
   document.getElementById("gateCountdown").textContent =
     `${days}d ${hours}h ${minutes}m ${seconds}s`;
 }
-setInterval(updateGate, 1000);
-updateGate();
 
-const screens = document.querySelectorAll(".screen");
-let current = 0;
+function reveal(id) {
+  const element = document.getElementById(id);
+  element.style.display =
+    element.style.display === "block" ? "none" : "block";
+}
 
-function showScreen(){
-  screens.forEach((s,i)=>s.classList.toggle("active",i===current));
-  document.getElementById("counter").textContent = `${current+1} / ${screens.length}`;
-  document.getElementById("progressBar").style.width = `${((current+1)/screens.length)*100}%`;
-  document.getElementById("prev").disabled = current===0;
-  document.getElementById("next").textContent = current===screens.length-1 ? "Volver al inicio ↺" : "Siguiente →";
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-function changeScreen(dir){
-  if(new Date() < UNLOCK_AT) return;
-  current = (current + dir + screens.length) % screens.length;
-  showScreen();
-}
-function reveal(id){
-  const el=document.getElementById(id);
-  el.style.display=el.style.display==="block"?"none":"block";
-}
-function quiz(correct){
+function quiz(correct) {
   document.getElementById("quizResult").textContent = correct
     ? "¡Correctooo! Ya voy aprendiendo JAJAJA 💗"
     : "JAJAJA nooo, inténtalo otra vez. :b";
 }
 
-const symbols=["🌸","🎀","🖤","💗"];
-let firstCard=null,lockBoard=false,matches=0;
-function newMemoryGame(){
-  const cards=[...symbols,...symbols].sort(()=>Math.random()-.5);
-  firstCard=null;lockBoard=false;matches=0;
-  document.getElementById("memoryResult").textContent="Parejas encontradas: 0 / 4";
-  const grid=document.getElementById("memoryGrid");grid.innerHTML="";
-  cards.forEach(symbol=>{
-    const b=document.createElement("button");
-    b.className="memoryCard";b.textContent="?";b.dataset.symbol=symbol;
-    b.onclick=()=>flipCard(b);grid.appendChild(b);
+// JUEGO DE MEMORIA
+const symbols = ["🌸","🎀","🖤","💗"];
+let firstCard = null;
+let lockBoard = false;
+let matches = 0;
+
+function newMemoryGame() {
+  const cards = [...symbols,...symbols].sort(() => Math.random() - .5);
+
+  firstCard = null;
+  lockBoard = false;
+  matches = 0;
+
+  document.getElementById("memoryResult").textContent =
+    "Parejas encontradas: 0 / 4";
+
+  const grid = document.getElementById("memoryGrid");
+  grid.innerHTML = "";
+
+  cards.forEach(symbol => {
+    const button = document.createElement("button");
+    button.className = "memoryCard";
+    button.textContent = "?";
+    button.dataset.symbol = symbol;
+    button.onclick = () => flipCard(button);
+    grid.appendChild(button);
   });
 }
-function flipCard(card){
-  if(lockBoard||card.classList.contains("matched")||card===firstCard||card.textContent!=="?")return;
-  card.textContent=card.dataset.symbol;
-  if(!firstCard){firstCard=card;return;}
-  if(firstCard.dataset.symbol===card.dataset.symbol){
-    firstCard.classList.add("matched");card.classList.add("matched");firstCard=null;matches++;
-    document.getElementById("memoryResult").textContent=`Parejas encontradas: ${matches} / 4`;
-    if(matches===4)document.getElementById("memoryResult").textContent="¡Ganaste! Muy buena memoria, Fridu. 💗";
-  }else{
-    lockBoard=true;const previous=firstCard;firstCard=null;
-    setTimeout(()=>{previous.textContent="?";card.textContent="?";lockBoard=false;},800);
+
+function flipCard(card) {
+  if (
+    lockBoard ||
+    card.classList.contains("matched") ||
+    card === firstCard ||
+    card.textContent !== "?"
+  ) return;
+
+  card.textContent = card.dataset.symbol;
+
+  if (!firstCard) {
+    firstCard = card;
+    return;
+  }
+
+  if (firstCard.dataset.symbol === card.dataset.symbol) {
+    firstCard.classList.add("matched");
+    card.classList.add("matched");
+    firstCard = null;
+    matches++;
+
+    document.getElementById("memoryResult").textContent =
+      `Parejas encontradas: ${matches} / 4`;
+
+    if (matches === 4) {
+      document.getElementById("memoryResult").textContent =
+        "¡Ganaste! Muy buena memoria, Fridu. 💗";
+    }
+  } else {
+    lockBoard = true;
+    const previous = firstCard;
+    firstCard = null;
+
+    setTimeout(() => {
+      previous.textContent = "?";
+      card.textContent = "?";
+      lockBoard = false;
+    },800);
   }
 }
-newMemoryGame();
 
-const fortunes=["Hoy te espera algo bonito. 🌷","No olvides lo increíble que eres. 💗","Que nunca te falten motivos para reír. ✨","Se vienen nuevas aventuras. 🚲","Hoy es un buen día para consentirte. 🎀","Te mando un montón de buenas vibras. 🖤"];
-function getFortune(){document.getElementById("fortune").textContent=fortunes[Math.floor(Math.random()*fortunes.length)];}
+// MÁQUINA DE DESEOS
+const fortunes = [
+  "Hoy te espera algo bonito. 🌷",
+  "No olvides lo increíble que eres. 💗",
+  "Que nunca te falten motivos para reír. ✨",
+  "Se vienen nuevas aventuras. 🚲",
+  "Hoy es un buen día para consentirte. 🎀",
+  "Te mando un montón de buenas vibras. 🖤"
+];
 
-let trapCount=0;
-const trapMessages=["TE DIJE QUE NO LO PICARAS JAJAJA 😭","Frida, ¿por qué no haces caso? 🤨","Bueno, ya vi que eres curiosa JAJAJA.","Última advertencia... o no. :b","Ya, ya, ganaste. Feliz cumpleaños. 💗"];
-function trap(){document.getElementById("trapResult").textContent=trapMessages[Math.min(trapCount++,trapMessages.length-1)];}
+function getFortune() {
+  document.getElementById("fortune").textContent =
+    fortunes[Math.floor(Math.random()*fortunes.length)];
+}
 
-const messages=["Espero que hoy tengas un día increíble. 💗","Nunca dejes de hacer las cosas que te gustan.","Que se cumplan muchas de tus metas. ✨","No olvides disfrutar cada pequeña cosa.","Te deseo muchas aventuras bonitas. 🚲","Sigue siendo tú, Fridu. :3","Un abrazo a la distancia. 🖤"];
-function randomMessage(){document.getElementById("randomMessage").textContent=messages[Math.floor(Math.random()*messages.length)];}
+// BOTÓN NO ME PIQUES
+let trapCount = 0;
 
-// HAPPY BIRTHDAY INSTRUMENTAL
+const trapMessages = [
+  "TE DIJE QUE NO LO PICARAS JAJAJA 😭",
+  "Frida, ¿por qué no haces caso? 🤨",
+  "Bueno, ya vi que eres curiosa JAJAJA.",
+  "Última advertencia... o no. :b",
+  "Ya, ya, ganaste. Feliz cumpleaños. 💗"
+];
+
+function trap() {
+  document.getElementById("trapResult").textContent =
+    trapMessages[Math.min(trapCount++,trapMessages.length-1)];
+}
+
+// MENSAJES ALEATORIOS
+const messages = [
+  "Espero que hoy tengas un día increíble. 💗",
+  "Nunca dejes de hacer las cosas que te gustan.",
+  "Que se cumplan muchas de tus metas. ✨",
+  "No olvides disfrutar cada pequeña cosa.",
+  "Te deseo muchas aventuras bonitas. 🚲",
+  "Sigue siendo tú, Fridu. :3",
+  "Un abrazo a la distancia. 🖤"
+];
+
+function randomMessage() {
+  document.getElementById("randomMessage").textContent =
+    messages[Math.floor(Math.random()*messages.length)];
+}
+
+// MELODÍA DE CUMPLEAÑOS
 let audioContext;
-function playMelody(){
-  const AC=window.AudioContext||window.webkitAudioContext;
-  if(!AC){alert("Tu navegador no permite reproducir esta melodía.");return;}
-  if(!audioContext)audioContext=new AC();
+
+function playMelody() {
+  const AC = window.AudioContext || window.webkitAudioContext;
+
+  if (!AC) {
+    alert("Tu navegador no permite reproducir esta melodía.");
+    return;
+  }
+
+  if (!audioContext) audioContext = new AC();
+
   audioContext.resume();
-  const beat=.34;
-  const melody=[
-    [261.63,0,1],[261.63,1,1],[293.66,2,2],[261.63,4,2],[349.23,6,2],[329.63,8,4],
-    [261.63,12,1],[261.63,13,1],[293.66,14,2],[261.63,16,2],[392.00,18,2],[349.23,20,4],
-    [261.63,24,1],[261.63,25,1],[523.25,26,2],[440.00,28,2],[349.23,30,2],[329.63,32,2],[293.66,34,4],
-    [466.16,38,1],[466.16,39,1],[440.00,40,2],[349.23,42,2],[392.00,44,2],[349.23,46,4]
+
+  const beat = .34;
+
+  const melody = [
+    [261.63,0,1],[261.63,1,1],[293.66,2,2],
+    [261.63,4,2],[349.23,6,2],[329.63,8,4],
+
+    [261.63,12,1],[261.63,13,1],[293.66,14,2],
+    [261.63,16,2],[392.00,18,2],[349.23,20,4],
+
+    [261.63,24,1],[261.63,25,1],[523.25,26,2],
+    [440.00,28,2],[349.23,30,2],[329.63,32,2],
+    [293.66,34,4],
+
+    [466.16,38,1],[466.16,39,1],[440.00,40,2],
+    [349.23,42,2],[392.00,44,2],[349.23,46,4]
   ];
-  melody.forEach(([freq,start,duration])=>{
-    const osc=audioContext.createOscillator(),gain=audioContext.createGain();
-    const t=audioContext.currentTime+start*beat;
-    osc.type="sine";osc.frequency.value=freq;
-    gain.gain.setValueAtTime(.0001,t);
-    gain.gain.exponentialRampToValueAtTime(.13,t+.035);
-    gain.gain.setValueAtTime(.13,t+duration*beat-.07);
-    gain.gain.exponentialRampToValueAtTime(.0001,t+duration*beat);
-    osc.connect(gain);gain.connect(audioContext.destination);
-    osc.start(t);osc.stop(t+duration*beat);
+
+  melody.forEach(([frequency,start,duration]) => {
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+
+    const time = audioContext.currentTime + start * beat;
+
+    oscillator.type = "sine";
+    oscillator.frequency.value = frequency;
+
+    gain.gain.setValueAtTime(.0001,time);
+    gain.gain.exponentialRampToValueAtTime(.13,time+.035);
+    gain.gain.setValueAtTime(.13,time+duration*beat-.07);
+    gain.gain.exponentialRampToValueAtTime(.0001,time+duration*beat);
+
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+
+    oscillator.start(time);
+    oscillator.stop(time+duration*beat);
   });
 }
 
-function celebrate(){
-  const container=document.getElementById("confetti");container.innerHTML="";
-  for(let i=0;i<90;i++){
-    const piece=document.createElement("span");
-    piece.textContent=["💗","🎀","✨","🌸"][i%4];
-    piece.style.position="absolute";piece.style.left=Math.random()*100+"vw";
-    piece.style.top="-30px";piece.style.fontSize=(15+Math.random()*18)+"px";
-    piece.style.transition=(2+Math.random()*3)+"s linear";
+// CONFETI
+function celebrate() {
+  const container = document.getElementById("confetti");
+  container.innerHTML = "";
+
+  for (let i=0;i<90;i++) {
+    const piece = document.createElement("span");
+
+    piece.textContent = ["💗","🎀","✨","🌸"][i%4];
+    piece.style.position = "absolute";
+    piece.style.left = Math.random()*100+"vw";
+    piece.style.top = "-30px";
+    piece.style.fontSize = (15+Math.random()*18)+"px";
+    piece.style.transition = (2+Math.random()*3)+"s linear";
+
     container.appendChild(piece);
-    requestAnimationFrame(()=>{piece.style.transform=`translateY(${innerHeight+60}px) rotate(${Math.random()*700}deg)`;});
+
+    requestAnimationFrame(() => {
+      piece.style.transform =
+        `translateY(${innerHeight+60}px) rotate(${Math.random()*700}deg)`;
+    });
   }
-  setTimeout(()=>container.innerHTML="",5500);
+
+  setTimeout(() => container.innerHTML="",5500);
 }
+
+// INICIALIZAR TODO AL FINAL
+// Esto evita el error que impedía usar el botón Siguiente.
+newMemoryGame();
+showScreen();
+updateGate();
+setInterval(updateGate,1000);
+
 </script>
 </body>
 </html>
