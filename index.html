@@ -4,652 +4,644 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#09070b">
+<meta name="theme-color" content="#100b11">
 <title>Un detalle para Fridu ♡</title>
 
 <style>
 :root {
-  --pink:#f5a9c8;
-  --light:#ffe1ed;
-  --dark:#09070b;
-  --panel:#17121a;
-  --muted:#b9aab5;
+  --bg: #0b080d;
+  --panel: #19121b;
+  --pink: #f2a2c7;
+  --pink2: #bd789f;
+  --text: #f8eaf2;
+  --muted: #bba9b6;
+  --line: #67445e;
 }
-* {box-sizing:border-box}
+* { box-sizing: border-box; }
 body {
-  margin:0;
-  min-height:100vh;
-  background:radial-gradient(circle at top,#392033 0%,transparent 45%),var(--dark);
-  color:white;
-  font-family:"Trebuchet MS",Arial,sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at top, #382032 0%, transparent 55%),
+    var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  text-align: center;
 }
+button, a { font: inherit; }
 button {
-  border:0;
-  border-radius:15px;
-  padding:13px 19px;
-  margin:7px 4px;
-  background:var(--pink);
-  color:#24131c;
-  font-size:15px;
-  font-weight:bold;
-  cursor:pointer;
+  border: 0;
+  cursor: pointer;
 }
-button:disabled {opacity:.45;cursor:not-allowed}
-#gate {
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:22px;
+#lockScreen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
 }
-.gate-panel {
-  width:100%;
-  max-width:560px;
-  background:var(--panel);
-  border:1px solid #76516a;
-  border-radius:27px;
-  padding:35px 24px;
-  text-align:center;
+.lock-card {
+  width: min(100%, 520px);
+  padding: 38px 25px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  box-shadow: 0 15px 60px #0008;
 }
-.gate-title {color:var(--pink)}
-#gateCountdown {
-  font-size:clamp(27px,7vw,39px);
-  font-weight:bold;
-  color:var(--light);
-  margin:24px 0;
+.lock-heart { font-size: 55px; }
+.lock-card h1 { color: var(--pink); }
+.lock-card p { color: var(--muted); line-height: 1.7; }
+#countdown {
+  color: var(--pink);
+  font-size: 28px;
+  font-weight: 800;
+  margin: 25px 0;
 }
-.gate-small,.muted {color:var(--muted)}
 #app {
-  display:none;
-  width:100%;
-  max-width:650px;
-  margin:0 auto;
-  padding:22px;
+  display: none;
+  width: min(100%, 850px);
+  margin: auto;
+  padding: 25px 20px 40px;
 }
-.top {
-  display:flex;
-  justify-content:space-between;
-  color:var(--muted);
-  font-size:13px;
-  margin-bottom:12px;
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--muted);
+  margin: 10px 0 14px;
 }
 .progress {
-  height:6px;
-  background:#30232e;
-  border-radius:20px;
-  overflow:hidden;
-  margin-bottom:22px;
+  height: 9px;
+  background: #352532;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 28px;
 }
-#progressBar {
-  height:100%;
-  width:0;
-  background:var(--pink);
-  transition:width .35s;
+#progressFill {
+  height: 100%;
+  width: 0;
+  background: var(--pink);
+  transition: width .3s;
 }
-.screen {display:none;animation:appear .35s ease}
-.screen.active {display:block}
+.screen {
+  display: none;
+  animation: appear .35s ease;
+}
+.screen.active { display: block; }
 @keyframes appear {
-  from {opacity:0;transform:translateY(12px)}
-  to {opacity:1;transform:translateY(0)}
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 .panel {
-  background:rgba(23,18,26,.96);
-  border:1px solid #543447;
-  border-radius:25px;
-  padding:30px 23px;
-  text-align:center;
-  box-shadow:0 15px 50px #0008;
+  background: rgba(25,18,27,.96);
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  padding: 38px 28px;
+  box-shadow: 0 15px 45px #0005;
 }
-h1 {
-  font-size:clamp(30px,8vw,48px);
-  color:var(--light);
+.emoji { font-size: 55px; margin-bottom: 15px; }
+h1, h2 { color: var(--pink); }
+h1 { font-size: clamp(30px, 7vw, 48px); }
+h2 { font-size: clamp(25px, 5vw, 35px); }
+p {
+  font-size: 18px;
+  line-height: 1.75;
 }
-h2 {color:var(--pink);font-size:27px}
-p {line-height:1.65;color:#eadde5}
-.emoji {font-size:48px;margin:12px}
+.muted { color: var(--muted); }
+.small { font-size: 14px; }
 .bigNumber {
-  font-size:35px;
-  font-weight:bold;
-  color:var(--pink);
-  margin:20px 0;
+  color: var(--pink);
+  font-size: clamp(35px, 9vw, 60px);
+  font-weight: 900;
+  margin: 22px 0;
 }
-.secondary {
-  background:#30232e;
-  color:white;
-  border:1px solid #76516a;
+.btn {
+  background: var(--pink);
+  color: #24121d;
+  padding: 16px 24px;
+  border-radius: 18px;
+  font-weight: 800;
+  margin: 8px;
+  transition: transform .2s;
 }
-.nav {
-  display:flex;
-  justify-content:space-between;
-  margin-top:20px;
+.btn:active { transform: scale(.96); }
+.btn.secondary {
+  background: #30222e;
+  color: var(--text);
+  border: 1px solid var(--line);
 }
-.nav button {min-width:115px}
-.choice {
-  display:block;
-  width:100%;
-  background:#30232e;
-  color:white;
-  border:1px solid #76516a;
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin: 28px 0;
 }
-.result {
-  min-height:35px;
-  color:var(--pink);
-  font-weight:bold;
-  margin-top:15px;
+.navigation button {
+  flex: 1;
+  max-width: 220px;
 }
-.gift {
-  background:#30232e;
-  border:1px solid #76516a;
-  border-radius:18px;
-  padding:15px;
-  margin:12px 0;
-  cursor:pointer;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 14px;
 }
-.hiddenText {
-  display:none;
-  color:var(--light);
-  margin-top:12px;
+.tile {
+  padding: 20px 12px;
+  background: #30222e;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  color: var(--text);
 }
-.memoryGrid {
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:9px;
-  margin-top:20px;
+.tile strong {
+  display: block;
+  color: var(--pink);
+  margin-bottom: 8px;
 }
-.memoryCard {
-  aspect-ratio:1;
-  font-size:25px;
-  padding:5px;
-  margin:0;
-  background:#30232e;
-  color:white;
-  border:1px solid #76516a;
+.photo {
+  width: 100%;
+  height: 330px;
+  object-fit: cover;
+  border-radius: 17px;
+  background: #0c090e;
+  display: block;
 }
-.memoryCard.matched {
-  background:#68465b;
-  border-color:var(--pink);
+.gallery-card {
+  background: #30222e;
+  border: 1px solid var(--line);
+  padding: 12px;
+  border-radius: 23px;
 }
-.gallery {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
+.gallery-card span {
+  display: block;
+  padding: 12px 0 4px;
+  color: var(--pink);
 }
-.photo-card {
-  background:#30232e;
-  border:1px solid #76516a;
-  border-radius:17px;
-  padding:8px;
-  overflow:hidden;
-}
-.photo-card img {
-  width:100%;
-  height:230px;
-  object-fit:cover;
-  border-radius:12px;
-  display:block;
-}
-.photo-card.wide {grid-column:1/-1}
-.photo-card.wide img {
-  height:auto;
-  max-height:560px;
-  object-fit:contain;
-  background:#100d12;
-}
-.photo-caption {
-  color:var(--light);
-  font-size:13px;
-  padding:8px 3px 3px;
-}
-a {
-  color:var(--pink);
-  overflow-wrap:anywhere;
+.illustration {
+  width: 100%;
+  max-height: 620px;
+  object-fit: contain;
+  border-radius: 17px;
+  background: #0c090e;
 }
 .song-link {
-  display:block;
-  background:#30232e;
-  border:1px solid #76516a;
-  border-radius:15px;
-  padding:14px;
-  margin:12px 0;
-  text-decoration:none;
+  display: block;
+  padding: 22px;
+  margin: 15px 0;
+  background: #30222e;
+  border: 1px solid var(--pink2);
+  border-radius: 22px;
+  color: var(--pink);
+  text-decoration: none;
 }
 .song-link strong {
-  display:block;
-  color:var(--light);
-  margin-bottom:5px;
+  display: block;
+  color: var(--text);
+  font-size: 19px;
+  margin-bottom: 8px;
 }
-.letter {
-  text-align:left;
-  background:#211923;
-  border-radius:17px;
-  padding:20px;
-  line-height:1.8;
+input {
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: #0e0a10;
+  color: white;
+  font-size: 17px;
+}
+.message {
+  background: #30222e;
+  border-radius: 18px;
+  padding: 20px;
+  margin: 15px 0;
+  color: var(--text);
+  line-height: 1.7;
+}
+#feedback {
+  min-height: 28px;
+  color: var(--pink);
+  margin-top: 12px;
 }
 footer {
-  text-align:center;
-  color:var(--muted);
-  font-size:12px;
-  margin-top:20px;
+  color: var(--muted);
+  font-size: 13px;
+  padding: 15px 0;
 }
-#confetti {
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:10;
+.confetti {
+  position: fixed;
+  top: -20px;
+  z-index: 99;
+  pointer-events: none;
+  animation: fall 3.5s linear forwards;
 }
-@media(max-width:400px) {
-  #app {padding:13px}
-  .panel {padding:24px 16px}
-  .photo-card img {height:175px}
+@keyframes fall {
+  to { transform: translateY(110vh) rotate(700deg); opacity: 0; }
+}
+@media(max-width:520px) {
+  #app { padding: 18px 14px 30px; }
+  .panel { padding: 30px 18px; }
+  .photo { height: 260px; }
+  .grid { gap: 10px; }
+  p { font-size: 16px; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- PANTALLA DE BLOQUEO -->
-<div id="gate">
-  <div class="gate-panel">
-    <div class="emoji">🔒</div>
-    <h1 class="gate-title">Una sorpresa está esperando...</h1>
-    <p>Este pequeño espacio todavía está cerrado.</p>
-    <div id="gateCountdown">Calculando...</div>
-    <p class="gate-small">
-      Hay detalles que tienen su momento. ♡<br>
-      Vuelve el 12 de noviembre.
-    </p>
-    <div class="emoji">🖤💗</div>
+<section id="lockScreen">
+  <div class="lock-card">
+    <div class="lock-heart">♡</div>
+    <h1>Un detalle para Fridu</h1>
+    <p>Hay algo preparado especialmente para ti...</p>
+    <p>Pero todavía no puedes verlo. Tendrás que esperar un poquito. :b</p>
+    <div id="countdown">Cargando...</div>
+    <p class="small">Vuelve el 12 de noviembre. ♡</p>
   </div>
-</div>
-
-<div id="confetti"></div>
+</section>
 
 <main id="app">
-
-<div class="top">
-  <span>Un detalle para Fridu ♡</span>
-  <span id="counter">1 / 16</span>
-</div>
-
-<div class="progress">
-  <div id="progressBar"></div>
-</div>
-
-<!-- 1 -->
-<section class="screen active">
-<div class="panel">
-  <div class="emoji">🎀</div>
-  <p class="muted">Hay algo que quiero enseñarte...</p>
-  <h1>¡Hola, Fridu!</h1>
-  <p>Preparé algo especialmente para ti. No es un regalo común, así que tendrás que descubrirlo poquito a poquito. :b</p>
-  <p>¿Estás lista?</p>
-  <div class="emoji">💗</div>
-</div>
-</section>
-
-<!-- 2 -->
-<section class="screen">
-<div class="panel">
-  <div class="emoji">🎂</div>
-  <h2>¡Llegó tu día!</h2>
-  <p>Hoy es una fecha especial y preparé algunas cositas para ti.</p>
-  <div class="bigNumber">12 · 11 · 2026</div>
-  <p class="muted">Ahora sí... comienza la sorpresa. ♡</p>
-</div>
-</section>
-
-<!-- 3 -->
-<section class="screen">
-<div class="panel">
-  <div class="emoji">🎁</div>
-  <h2>Tres regalitos para ti</h2>
-  <p>Abre cada uno. No tienen envoltura, pero sí intención. :b</p>
-
-  <div class="gift" onclick="reveal('gift1')">
-    🎁 Regalo número 1
-    <div class="hiddenText" id="gift1">Un deseo: que tengas muchísimos motivos para sonreír. 💗</div>
+  <div class="topbar">
+    <span>Un detalle para Fridu ♡</span>
+    <span id="pageNumber">1 / 16</span>
+  </div>
+  <div class="progress">
+    <div id="progressFill"></div>
   </div>
 
-  <div class="gift" onclick="reveal('gift2')">
-    🎁 Regalo número 2
-    <div class="hiddenText" id="gift2">Un recordatorio: eres una persona única y mereces cosas bonitas.</div>
-  </div>
-
-  <div class="gift" onclick="reveal('gift3')">
-    🎁 Regalo número 3
-    <div class="hiddenText" id="gift3">Un montón de buenas vibras para todo lo que viene. ✨</div>
-  </div>
-</div>
-</section>
-
-<!-- 4 -->
-<section class="screen">
-<div class="panel">
-  <div class="emoji">🧠</div>
-  <h2>Pequeño examen</h2>
-  <p>¿Cuáles son tus colores favoritos?</p>
-  <button class="choice" onclick="quiz(false)">Azul y amarillo</button>
-  <button class="choice" onclick="quiz(true)">Negro y rosa clarito</button>
-  <button class="choice" onclick="quiz(false)">Verde y morado</button>
-  <div class="result" id="quizResult"></div>
-</div>
-</section>
-
-<!-- 5 -->
-<section class="screen">
-<div class="panel">
-  <div class="emoji">🃏</div>
-  <h2>Encuentra las parejas</h2>
-  <p>Un pequeño juego para poner a trabajar esa memoria JAJAJA.</p>
-  <div class="memoryGrid" id="memoryGrid"></div>
-  <div class="result" id="memoryResult">Parejas encontradas: 0 / 4</div>
-  <button class="secondary" onclick="newMemoryGame()">Reiniciar juego</button>
-</div>
-</section>
-
-<!-- 6 -->
-<section class="screen">
-<div class="panel">
-  <div class="emoji">🔮</div>
-  <h2>Máquina de buenos deseos</h2>
-  <p>Presiona el botón y descubre qué te toca hoy.</p>
-  <div class="bigNumber" id="fortune">♡</div>
-  <button onclick="getFortune()">Descubrir mi suerte</button>
-</div>
-</section>
-
-<!-- 7 -->
-<section class="screen">
-<div class="panel">
-  <div class="emoji">🌷</div>
-  <h2>Abre esto cuando estés aburrida</h2>
-  <p>Porque no todo en la vida puede ser estar acostada viendo el celular JAJAJA.</p>
-  <button onclick="reveal('bored')">Abrir mensajito</button>
-  <div class="hiddenText" id="bored">
-    Misión del día: escucha una canción que te guste, sal un ratito, disfruta algo rico y recuerda que alguien se tomó el tiempo de hacerte esta página. :3
-  </div>
-</div>
-</section>
-
-<!-- 8 -->
-<section class="screen">
-<div class="panel">
-  <div class="emoji">🤨</div>
-  <h2>NO ME PIQUES</h2>
-  <p>En serio, Frida. No presiones el botón.</p>
-  <button onclick="trap()">NO TOCAR</button>
-  <div class="result" id="trapResult"></div>
-</div>
-</section>
-
-<!-- 9 GALERÍA -->
-<section class="screen">
-<div class="panel">
-  <div class="emoji">📸</div>
-  <h2>Unas fotitos de Fridu</h2>
-  <p>Porque algunos momentos merecen quedarse guardados. 💗</p>
-
-  <div class="gallery">
-    <div class="photo-card">
-      <img src="foto1.jpg" alt="Foto de Frida 1">
-      <div class="photo-caption">♡</div>
+  <!-- 1 -->
+  <section class="screen active">
+    <div class="panel">
+      <div class="emoji">🎀</div>
+      <h1>¡Hola, Fridu!</h1>
+      <p>Hice algo para ti y espero que te guste.</p>
+      <p class="muted">No es un regalo enorme, pero sí está hecho con mucho cariño.</p>
+      <div class="bigNumber">♡</div>
+      <p>¿Lista para descubrirlo?</p>
     </div>
+  </section>
 
-    <div class="photo-card">
-      <img src="foto2.jpg" alt="Foto de Frida 2">
-      <div class="photo-caption">🌸</div>
+  <!-- 2 -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">🎂</div>
+      <h2>¡Llegó tu día!</h2>
+      <p>Hoy es un día para celebrar que existes y desearte muchísimas cosas bonitas.</p>
+      <div class="bigNumber">12 · 11 · 2026</div>
+      <p class="muted">Un día especial para alguien especial. ♡</p>
     </div>
+  </section>
 
-    <div class="photo-card">
-      <img src="foto3.jpg" alt="Foto de Frida 3">
-      <div class="photo-caption">🎀</div>
-    </div>
-
-    <div class="photo-card">
-      <img src="foto4.jpg" alt="Foto de Frida 4">
-      <div class="photo-caption">✨</div>
-    </div>
-
-    <div class="photo-card wide">
-      <img src="ilustracion.jpg" alt="Ilustración de Frida y Dono juntos">
-      <div class="photo-caption">
-        Y una foto que todavía no teníamos... así que tocó dibujarla. JAJAJA ♡
+  <!-- 3 -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">🎁</div>
+      <h2>Tres regalitos</h2>
+      <p>Toca cada uno para descubrirlo.</p>
+      <div class="grid">
+        <button class="tile" onclick="revealGift(0)">
+          <strong>🎀 Regalo 1</strong>
+          <span id="gift0">¿Qué será?</span>
+        </button>
+        <button class="tile" onclick="revealGift(1)">
+          <strong>💗 Regalo 2</strong>
+          <span id="gift1">¿Qué será?</span>
+        </button>
+        <button class="tile" onclick="revealGift(2)">
+          <strong>✨ Regalo 3</strong>
+          <span id="gift2">¿Qué será?</span>
+        </button>
+        <button class="tile" onclick="revealGift(3)">
+          <strong>🎉 Extra</strong>
+          <span id="gift3">¿Qué será?</span>
+        </button>
       </div>
     </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">🧠</div>
+      <h2>Pequeño quiz</h2>
+      <p>¿Cuál de estos colores es uno de tus favoritos?</p>
+      <button class="btn secondary" onclick="quizAnswer(false)">Azul</button>
+      <button class="btn secondary" onclick="quizAnswer(true)">Negro y rosa</button>
+      <button class="btn secondary" onclick="quizAnswer(false)">Verde</button>
+      <div id="quizFeedback"></div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">🃏</div>
+      <h2>Encuentra las parejas</h2>
+      <p>Un mini juego para entretenerte.</p>
+      <div class="grid" id="memoryGrid"></div>
+      <p id="memoryStatus" class="muted">Encuentra las 3 parejas.</p>
+      <button class="btn secondary" onclick="resetMemory()">Volver a jugar</button>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">🍀</div>
+      <h2>Máquina de buenos deseos</h2>
+      <p>Presiona el botón y recibe un deseo al azar.</p>
+      <button class="btn" onclick="randomWish()">Dame suerte ♡</button>
+      <div class="message" id="wish">Aquí aparecerá tu deseo...</div>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">🌷</div>
+      <h2>Abre cuando estés aburrida</h2>
+      <p>Un pequeño recordatorio:</p>
+      <button class="btn" onclick="showBored()">Abrir mensajito</button>
+      <div class="message" id="boredMessage">Toca el botón. :b</div>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">👀</div>
+      <h2>NO ME PIQUES</h2>
+      <p>Bueno... si quieres, puedes intentarlo.</p>
+      <button class="btn" id="dontPress" onclick="pressMe()">No tocar</button>
+      <div id="pressFeedback"></div>
+    </div>
+  </section>
+
+  <!-- 9 -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">📸</div>
+      <h2>Un poquito de ti</h2>
+      <p>Algunas fotitos que ahora forman parte de este pequeño regalo. ♡</p>
+      <div class="grid">
+        <div class="gallery-card">
+          <img class="photo" src="foto1.jpg" alt="Foto de Frida">
+          <span>♡</span>
+        </div>
+        <div class="gallery-card">
+          <img class="photo" src="foto2.jpg" alt="Foto de Frida">
+          <span>🌸</span>
+        </div>
+        <div class="gallery-card">
+          <img class="photo" src="foto3.jpg" alt="Foto de Frida">
+          <span>🎀</span>
+        </div>
+        <div class="gallery-card">
+          <img class="photo" src="foto4.jpg" alt="Foto de Frida">
+          <span>✨</span>
+        </div>
+      </div>
+      <p class="muted small">Unas fotos para guardar este recuerdo. ♡</p>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">🎨</div>
+      <h2>Una foto que faltaba</h2>
+      <p>Y una foto que todavía no teníamos... así que tocó dibujarla. JAJAJA ♡</p>
+      <img class="illustration" src="ilustracion.png" alt="Ilustración de Frida y Dono juntos">
+      <p class="muted">Una pequeña versión de nosotros. :b</p>
+    </div>
+  </section>
+
+  <!-- 11 -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">🎧</div>
+      <h2>Su soundtrack</h2>
+      <p>Porque también hay canciones que te encantan y merecían un espacio aquí JAJAJA.</p>
+
+      <a class="song-link"
+         href="https://open.spotify.com/search/Travis%20Scott%20ASTROTHUNDER"
+         target="_blank" rel="noopener">
+        <strong>ASTROTHUNDER</strong>
+        Travis Scott · Abrir en Spotify ♡
+      </a>
+
+      <a class="song-link"
+         href="https://open.spotify.com/search/Travis%20Scott%20COFFEE%20BEAN"
+         target="_blank" rel="noopener">
+        <strong>COFFEE BEAN</strong>
+        Travis Scott · Abrir en Spotify ♡
+      </a>
+
+      <a class="song-link"
+         href="https://vt.tiktok.com/ZSpBjjBdG/"
+         target="_blank" rel="noopener">
+        <strong>Un TikTok que quería compartir contigo ♡</strong>
+        Abrir video en TikTok
+      </a>
+
+      <p>Y también te dejo una melodía especial de cumpleaños:</p>
+      <button class="btn" id="musicButton" onclick="playMelody()">
+        ▶ Reproducir Happy Birthday
+      </button>
+      <p class="muted small" id="musicStatus">Toca para escuchar la melodía.</p>
+    </div>
+  </section>
+
+  <!-- 12 -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">🌙</div>
+      <h2>Un poquito de Fridu</h2>
+      <div class="message">
+        <strong>Color favorito:</strong> negro y rosa claro 🌸
+      </div>
+      <div class="message">
+        <strong>Le gusta:</strong> andar en bicicleta 🚲
+      </div>
+      <div class="message">
+        <strong>También:</strong> ir al gimnasio 🏋️‍♀️
+      </div>
+      <p class="muted">Pequeños detalles que hacen que esta página sea tuya.</p>
+    </div>
+  </section>
+
+  <!-- 13 -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">⏳</div>
+      <h2>Un mes aproximadamente</h2>
+      <div class="bigNumber">≈ 1 MES</div>
+      <p>No sabemos exactamente cuándo empezamos a hablar, pero por aquí ya llevamos aproximadamente un mes JAJAJA.</p>
+      <p>Y quién sabe cuántas conversaciones, risas y ocurrencias nos esperan todavía. :3</p>
+      <p class="muted">Esto apenas comienza. ♡</p>
+    </div>
+  </section>
+
+  <!-- 14 -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">💌</div>
+      <h2>Un mensajito para ti</h2>
+      <button class="btn" onclick="showRandomMessage()">Abrir mensaje</button>
+      <div class="message" id="randomMessage">Hay varios mensajitos escondidos aquí...</div>
+    </div>
+  </section>
+
+  <!-- 15 -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">♡</div>
+      <h2>Una pequeña dedicatoria</h2>
+      <p>Esto lo hice especialmente para ti Fridu :b cada detalle está aquí porque quería regalarte algo aunque fuera a distancia :v</p>
+      <p>Espero que hoy tengas un día muy bonito, que te consientan mucho y que este nuevo año te traiga momentos que te hagan feliz.</p>
+      <p>Gracias por las conversaciones, las ocurrencias y por este pequeño espacio que hemos compartido.</p>
+      <div class="bigNumber">— Dono ♡</div>
+    </div>
+  </section>
+
+  <!-- 16 -->
+  <section class="screen">
+    <div class="panel">
+      <div class="emoji">🎂🎀💗</div>
+      <h1>¡Feliz cumpleaños, Fridu!</h1>
+      <p>Que nunca te falten motivos para sonreír, sueños por cumplir y personas que te quieran ver feliz.</p>
+      <p>Disfruta muchísimo tu día. Te mando un abrazo hasta México. ♡</p>
+      <div class="bigNumber">FELIZ 12 DE NOVIEMBRE</div>
+      <button class="btn" onclick="celebrate()">Celebrar 🎉</button>
+      <p class="muted" id="celebrationMessage"></p>
+    </div>
+  </section>
+
+  <div class="navigation">
+    <button class="btn secondary" id="previousButton" onclick="move(-1)">← Anterior</button>
+    <button class="btn" id="nextButton" onclick="move(1)">Siguiente →</button>
   </div>
-</div>
-</section>
-
-<!-- 10 MÚSICA -->
-<section class="screen">
-<div class="panel">
-  <div class="emoji">🎧</div>
-  <h2>Su soundtrack</h2>
-  <p>Porque también hay canciones que dicen un poquito de nosotros... o al menos que te encantan a ti JAJAJA.</p>
-
-  <a class="song-link"
-     href="https://open.spotify.com/search/ASTROTHUNDER%20Travis%20Scott"
-     target="_blank" rel="noopener">
-    <strong>ASTROTHUNDER</strong>
-    <span>Travis Scott · Abrir en Spotify ♡</span>
-  </a>
-
-  <a class="song-link"
-     href="https://open.spotify.com/search/COFFEE%20BEAN%20Travis%20Scott"
-     target="_blank" rel="noopener">
-    <strong>COFFEE BEAN</strong>
-    <span>Travis Scott · Abrir en Spotify ♡</span>
-  </a>
-
-  <p class="muted">Y también te dejo una melodía especial de cumpleaños:</p>
-  <button onclick="playMelody()">▶ Reproducir Happy Birthday</button>
-</div>
-</section>
-
-<!-- 11 -->
-<section class="screen">
-<div class="panel">
-  <div class="emoji">🌷</div>
-  <h2>Datos de una Fridu</h2>
-  <p>Una pequeña ficha de la cumpleañera:</p>
-  <p>🖤 Color favorito: negro</p>
-  <p>🌸 Otro color favorito: rosa clarito</p>
-  <p>🚲 Le gusta andar en bicicleta</p>
-  <p>🏋️ Le gusta ir al gimnasio</p>
-  <p class="muted">Y seguramente hay muchas cosas más que todavía me falta descubrir.</p>
-</div>
-</section>
-
-<!-- 12 -->
-<section class="screen">
-<div class="panel">
-  <div class="emoji">♡</div>
-  <h2>Un mes de conocernos...</h2>
-  <p class="muted">Bueno, aproximadamente JAJAJA</p>
-  <div class="bigNumber">≈ 1 MES</div>
-  <p>No sabemos exactamente cuándo empezamos a hablar, pero sí sabemos que por aquí ya llevamos aproximadamente un mes JAJAJA.</p>
-  <p>Y quién sabe cuántas conversaciones, risas y ocurrencias nos esperan todavía. :3</p>
-  <div class="emoji">💗</div>
-  <p class="muted">Y esto apenas comienza.</p>
-  <p>— Dono ♡</p>
-</div>
-</section>
-
-<!-- 13 -->
-<section class="screen">
-<div class="panel">
-  <div class="emoji">💌</div>
-  <h2>Mensajitos aleatorios</h2>
-  <p>Presiona para recibir uno diferente.</p>
-  <div class="bigNumber" style="font-size:24px" id="randomMessage">♡</div>
-  <button onclick="randomMessage()">Otro mensajito</button>
-</div>
-</section>
-
-<!-- 14 CARTA -->
-<section class="screen">
-<div class="panel">
-  <div class="emoji">✉️</div>
-  <h2>Una pequeña carta</h2>
-
-  <div class="letter">
-    <p>Hola, Fridu. 💗</p>
-
-    <p>Quería hacer algo diferente para tu cumpleaños. Aunque estemos lejos, quería tener un detallito contigo y hacerte saber que me da gusto haberte conocido.</p>
-
-    <p>Espero que este nuevo año de vida venga lleno de experiencias bonitas, nuevas aventuras, risas y muchas cosas que te hagan feliz.</p>
-
-    <p>Gracias por las conversaciones, las ocurrencias y por formar parte de mis días.</p>
-
-    <p>¡Feliz cumpleaños, Fridu! :3</p>
-
-    <p>— Dono ♡</p>
-  </div>
-</div>
-</section>
-
-<!-- 15 DEDICATORIA -->
-<section class="screen">
-<div class="panel">
-  <div class="emoji">🎀</div>
-  <h2>Esto es especialmente para ti</h2>
-  <p>Esto lo hice especialmente para ti Fridu :b cada detalle está aquí porque quería regalarte algo aunque fuera a distancia :v</p>
-  <div class="emoji">🖤💗</div>
-  <p>De parte de Dono</p>
-</div>
-</section>
-
-<!-- 16 FINAL -->
-<section class="screen">
-<div class="panel">
-  <div class="emoji">🎉</div>
-  <h1>¡Feliz cumpleaños, Fridu!</h1>
-  <p>Espero que tu día sea tan bonito como tú y que este nuevo año esté lleno de cosas increíbles.</p>
-  <div class="bigNumber">12 · 11 · 2026</div>
-  <p>Gracias por llegar hasta el final de este pequeño regalo.</p>
-  <div class="emoji">🖤💗</div>
-  <h2>Con cariño, Dono ♡</h2>
-  <button onclick="celebrate()">¡Celebrar! 🎊</button>
-  <p class="muted">Fin... ¿o el comienzo de más historias? :b</p>
-</div>
-</section>
-
-<div class="nav">
-  <button class="secondary" id="prev" onclick="changeScreen(-1)">← Anterior</button>
-  <button id="next" onclick="changeScreen(1)">Siguiente →</button>
-</div>
-
-<footer>Hecho con ♡ por Dono, especialmente para Fridu.</footer>
+  <footer>Hecho con ♡ por Dono, especialmente para Fridu.</footer>
 </main>
 
 <script>
-// FECHA TEMPORAL PARA QUE PUEDAS REVISAR LA PÁGINA.
-// ANTES DE COMPARTIRLA, CAMBIA EL DÍA 10 POR EL 12.
-const UNLOCK_AT = new Date(2026, 10, 10, 0, 0, 0);
+/* FECHA DE APERTURA: 12 DE NOVIEMBRE DE 2026 */
+const birthday = new Date(2026, 10, 12, 0, 0, 0);
+const previewMode = new URLSearchParams(window.location.search).get("preview") === "1";
 
-const gate = document.getElementById("gate");
+const lockScreen = document.getElementById("lockScreen");
 const app = document.getElementById("app");
-const screens = document.querySelectorAll(".screen");
-let current = 0;
+const countdown = document.getElementById("countdown");
 
-function showScreen() {
-  screens.forEach((screen,index) => {
-    screen.classList.toggle("active", index === current);
-  });
+function updateLock() {
+  const now = new Date();
+  const difference = birthday - now;
 
-  document.getElementById("counter").textContent =
-    `${current+1} / ${screens.length}`;
-
-  document.getElementById("progressBar").style.width =
-    `${((current+1)/screens.length)*100}%`;
-
-  document.getElementById("prev").disabled = current === 0;
-
-  document.getElementById("next").textContent =
-    current === screens.length-1
-      ? "Volver al inicio ↺"
-      : "Siguiente →";
-
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-
-function changeScreen(direction) {
-  if (new Date() < UNLOCK_AT) return;
-
-  current = (current + direction + screens.length) % screens.length;
-  showScreen();
-}
-
-// COMPROBAR EL BLOQUEO Y EL CONTADOR
-function updateGate() {
-  const diff = UNLOCK_AT - new Date();
-
-  if (diff <= 0) {
-    gate.style.display = "none";
+  if (difference <= 0 || previewMode) {
+    lockScreen.style.display = "none";
     app.style.display = "block";
     return;
   }
 
-  gate.style.display = "flex";
+  lockScreen.style.display = "flex";
   app.style.display = "none";
 
-  const days = Math.floor(diff / 86400000);
-  const hours = Math.floor((diff / 3600000) % 24);
-  const minutes = Math.floor((diff / 60000) % 60);
-  const seconds = Math.floor((diff / 1000) % 60);
+  const days = Math.floor(difference / 86400000);
+  const hours = Math.floor((difference % 86400000) / 3600000);
+  const minutes = Math.floor((difference % 3600000) / 60000);
+  const seconds = Math.floor((difference % 60000) / 1000);
 
-  document.getElementById("gateCountdown").textContent =
+  countdown.textContent =
     `${days}d ${hours}h ${minutes}m ${seconds}s`;
 }
 
-function reveal(id) {
-  const element = document.getElementById(id);
-  element.style.display =
-    element.style.display === "block" ? "none" : "block";
+updateLock();
+setInterval(updateLock, 1000);
+
+/* NAVEGACIÓN */
+const screens = document.querySelectorAll(".screen");
+let current = 0;
+
+function showScreen(index) {
+  current = Math.max(0, Math.min(index, screens.length - 1));
+
+  screens.forEach((screen, i) => {
+    screen.classList.toggle("active", i === current);
+  });
+
+  document.getElementById("pageNumber").textContent =
+    `${current + 1} / ${screens.length}`;
+
+  document.getElementById("progressFill").style.width =
+    `${((current + 1) / screens.length) * 100}%`;
+
+  document.getElementById("previousButton").style.visibility =
+    current === 0 ? "hidden" : "visible";
+
+  document.getElementById("nextButton").textContent =
+    current === screens.length - 1 ? "Volver al inicio ↺" : "Siguiente →";
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-function quiz(correct) {
-  document.getElementById("quizResult").textContent = correct
-    ? "¡Correctooo! Ya voy aprendiendo JAJAJA 💗"
-    : "JAJAJA nooo, inténtalo otra vez. :b";
+function move(direction) {
+  if (current === screens.length - 1 && direction === 1) {
+    showScreen(0);
+  } else {
+    showScreen(current + direction);
+  }
+}
+showScreen(0);
+
+/* REGALITOS */
+const gifts = [
+  "Un día lleno de cosas bonitas. 💗",
+  "Un abrazo a la distancia. 🫂",
+  "Muchísimos buenos deseos. ✨",
+  "Esta página hecha especialmente para ti. 🎀"
+];
+
+function revealGift(index) {
+  document.getElementById("gift" + index).textContent = gifts[index];
 }
 
-// JUEGO DE MEMORIA
-const symbols = ["🌸","🎀","🖤","💗"];
+/* QUIZ */
+function quizAnswer(correct) {
+  document.getElementById("quizFeedback").textContent =
+    correct
+      ? "¡Correcto! JAJAJA, sí me acuerdo. 💗"
+      : "Mmm... intenta otra vez. :b";
+}
+
+/* MEMORIA */
+const symbols = ["🎀", "🌸", "⭐", "🎀", "🌸", "⭐"];
 let firstCard = null;
-let lockBoard = false;
-let matches = 0;
+let locked = false;
+let matched = 0;
 
-function newMemoryGame() {
-  const cards = [...symbols,...symbols].sort(() => Math.random() - .5);
-
+function resetMemory() {
   firstCard = null;
-  lockBoard = false;
-  matches = 0;
-
-  document.getElementById("memoryResult").textContent =
-    "Parejas encontradas: 0 / 4";
-
+  locked = false;
+  matched = 0;
+  const shuffled = [...symbols].sort(() => Math.random() - 0.5);
   const grid = document.getElementById("memoryGrid");
   grid.innerHTML = "";
 
-  cards.forEach(symbol => {
+  shuffled.forEach(symbol => {
     const button = document.createElement("button");
-    button.className = "memoryCard";
+    button.className = "tile";
     button.textContent = "?";
     button.dataset.symbol = symbol;
     button.onclick = () => flipCard(button);
     grid.appendChild(button);
   });
+
+  document.getElementById("memoryStatus").textContent =
+    "Encuentra las 3 parejas.";
 }
 
 function flipCard(card) {
-  if (
-    lockBoard ||
-    card.classList.contains("matched") ||
-    card === firstCard ||
-    card.textContent !== "?"
-  ) return;
+  if (locked || card.dataset.found === "yes" || card === firstCard) return;
 
   card.textContent = card.dataset.symbol;
 
@@ -659,165 +651,172 @@ function flipCard(card) {
   }
 
   if (firstCard.dataset.symbol === card.dataset.symbol) {
-    firstCard.classList.add("matched");
-    card.classList.add("matched");
+    firstCard.dataset.found = "yes";
+    card.dataset.found = "yes";
     firstCard = null;
-    matches++;
+    matched++;
 
-    document.getElementById("memoryResult").textContent =
-      `Parejas encontradas: ${matches} / 4`;
-
-    if (matches === 4) {
-      document.getElementById("memoryResult").textContent =
-        "¡Ganaste! Muy buena memoria, Fridu. 💗";
+    if (matched === 3) {
+      document.getElementById("memoryStatus").textContent =
+        "¡Lo lograste! 🎉";
     }
   } else {
-    lockBoard = true;
+    locked = true;
     const previous = firstCard;
     firstCard = null;
 
     setTimeout(() => {
       previous.textContent = "?";
       card.textContent = "?";
-      lockBoard = false;
-    },800);
+      locked = false;
+    }, 750);
   }
 }
+resetMemory();
 
-// MÁQUINA DE DESEOS
-const fortunes = [
-  "Hoy te espera algo bonito. 🌷",
-  "No olvides lo increíble que eres. 💗",
-  "Que nunca te falten motivos para reír. ✨",
-  "Se vienen nuevas aventuras. 🚲",
-  "Hoy es un buen día para consentirte. 🎀",
-  "Te mando un montón de buenas vibras. 🖤"
+/* DESEOS */
+const wishes = [
+  "Que nunca te falten razones para sonreír. ♡",
+  "Que se te cumplan muchas metas.",
+  "Que tengas días llenos de tranquilidad.",
+  "Que siempre encuentres algo bonito en cada día.",
+  "Que este año esté lleno de nuevas experiencias.",
+  "Que nunca dejes de perseguir lo que te hace feliz."
 ];
 
-function getFortune() {
-  document.getElementById("fortune").textContent =
-    fortunes[Math.floor(Math.random()*fortunes.length)];
+function randomWish() {
+  const wish = wishes[Math.floor(Math.random() * wishes.length)];
+  document.getElementById("wish").textContent = wish;
 }
 
-// BOTÓN NO ME PIQUES
-let trapCount = 0;
-
-const trapMessages = [
-  "TE DIJE QUE NO LO PICARAS JAJAJA 😭",
-  "Frida, ¿por qué no haces caso? 🤨",
-  "Bueno, ya vi que eres curiosa JAJAJA.",
-  "Última advertencia... o no. :b",
-  "Ya, ya, ganaste. Feliz cumpleaños. 💗"
-];
-
-function trap() {
-  document.getElementById("trapResult").textContent =
-    trapMessages[Math.min(trapCount++,trapMessages.length-1)];
+/* MENSAJE PARA DÍAS ABURRIDOS */
+function showBored() {
+  document.getElementById("boredMessage").textContent =
+    "Si estás aburrida, recuerda que en algún lugar alguien se tomó el tiempo de hacerte una página entera JAJAJA. :b";
 }
 
-// MENSAJES ALEATORIOS
-const messages = [
-  "Espero que hoy tengas un día increíble. 💗",
-  "Nunca dejes de hacer las cosas que te gustan.",
-  "Que se cumplan muchas de tus metas. ✨",
-  "No olvides disfrutar cada pequeña cosa.",
-  "Te deseo muchas aventuras bonitas. 🚲",
-  "Sigue siendo tú, Fridu. :3",
-  "Un abrazo a la distancia. 🖤"
-];
-
-function randomMessage() {
-  document.getElementById("randomMessage").textContent =
-    messages[Math.floor(Math.random()*messages.length)];
-}
-
-// MELODÍA DE CUMPLEAÑOS
-let audioContext;
-
-function playMelody() {
-  const AC = window.AudioContext || window.webkitAudioContext;
-
-  if (!AC) {
-    alert("Tu navegador no permite reproducir esta melodía.");
-    return;
-  }
-
-  if (!audioContext) audioContext = new AC();
-
-  audioContext.resume();
-
-  const beat = .34;
-
-  const melody = [
-    [261.63,0,1],[261.63,1,1],[293.66,2,2],
-    [261.63,4,2],[349.23,6,2],[329.63,8,4],
-
-    [261.63,12,1],[261.63,13,1],[293.66,14,2],
-    [261.63,16,2],[392.00,18,2],[349.23,20,4],
-
-    [261.63,24,1],[261.63,25,1],[523.25,26,2],
-    [440.00,28,2],[349.23,30,2],[329.63,32,2],
-    [293.66,34,4],
-
-    [466.16,38,1],[466.16,39,1],[440.00,40,2],
-    [349.23,42,2],[392.00,44,2],[349.23,46,4]
+/* BOTÓN */
+let presses = 0;
+function pressMe() {
+  presses++;
+  const messages = [
+    "Te dije que no lo picaras JAJAJA.",
+    "¿Otra vez? 😭",
+    "Bueno, ya vi que no haces caso.",
+    "Está bien, ganaste. :b",
+    "Última vez... bueno, tú sabrás JAJAJA."
   ];
-
-  melody.forEach(([frequency,start,duration]) => {
-    const oscillator = audioContext.createOscillator();
-    const gain = audioContext.createGain();
-
-    const time = audioContext.currentTime + start * beat;
-
-    oscillator.type = "sine";
-    oscillator.frequency.value = frequency;
-
-    gain.gain.setValueAtTime(.0001,time);
-    gain.gain.exponentialRampToValueAtTime(.13,time+.035);
-    gain.gain.setValueAtTime(.13,time+duration*beat-.07);
-    gain.gain.exponentialRampToValueAtTime(.0001,time+duration*beat);
-
-    oscillator.connect(gain);
-    gain.connect(audioContext.destination);
-
-    oscillator.start(time);
-    oscillator.stop(time+duration*beat);
-  });
+  document.getElementById("pressFeedback").textContent =
+    messages[Math.min(presses - 1, messages.length - 1)];
 }
 
-// CONFETI
-function celebrate() {
-  const container = document.getElementById("confetti");
-  container.innerHTML = "";
+/* MENSAJITOS */
+const randomMessages = [
+  "Espero que hoy te pase algo que te haga muy feliz. ♡",
+  "Nunca dejes de tener sueños grandes.",
+  "Que este nuevo año venga lleno de cosas bonitas.",
+  "Sigue siendo tú, con todas tus ocurrencias. :b",
+  "Te deseo muchas aventuras y recuerdos bonitos."
+];
 
-  for (let i=0;i<90;i++) {
-    const piece = document.createElement("span");
+function showRandomMessage() {
+  const message = randomMessages[
+    Math.floor(Math.random() * randomMessages.length)
+  ];
+  document.getElementById("randomMessage").textContent = message;
+}
 
-    piece.textContent = ["💗","🎀","✨","🌸"][i%4];
-    piece.style.position = "absolute";
-    piece.style.left = Math.random()*100+"vw";
-    piece.style.top = "-30px";
-    piece.style.fontSize = (15+Math.random()*18)+"px";
-    piece.style.transition = (2+Math.random()*3)+"s linear";
+/* MELODÍA ORIGINAL DE CUMPLEAÑOS */
+let audioContext = null;
 
-    container.appendChild(piece);
+async function playMelody() {
+  const button = document.getElementById("musicButton");
+  const status = document.getElementById("musicStatus");
 
-    requestAnimationFrame(() => {
-      piece.style.transform =
-        `translateY(${innerHeight+60}px) rotate(${Math.random()*700}deg)`;
+  try {
+    const AudioContextClass =
+      window.AudioContext || window.webkitAudioContext;
+
+    if (!AudioContextClass) {
+      status.textContent = "Tu navegador no permite reproducir audio.";
+      return;
+    }
+
+    if (!audioContext) audioContext = new AudioContextClass();
+
+    await audioContext.resume();
+
+    button.disabled = true;
+    button.textContent = "♫ Reproduciendo...";
+    status.textContent = "Una melodía para ti. ♡";
+
+    const beat = 0.34;
+    const melody = [
+      [261.63,0,1],[261.63,1,1],[293.66,2,2],
+      [261.63,4,2],[349.23,6,2],[329.63,8,4],
+      [261.63,12,1],[261.63,13,1],[293.66,14,2],
+      [261.63,16,2],[392.00,18,2],[349.23,20,4],
+      [261.63,24,1],[261.63,25,1],[523.25,26,2],
+      [440.00,28,2],[349.23,30,2],[329.63,32,2],
+      [293.66,34,4],
+      [466.16,38,1],[466.16,39,1],[440.00,40,2],
+      [349.23,42,2],[392.00,44,2],[349.23,46,4]
+    ];
+
+    melody.forEach(([frequency, start, duration]) => {
+      const oscillator = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      const time = audioContext.currentTime + start * beat;
+      const length = duration * beat;
+
+      oscillator.type = "sine";
+      oscillator.frequency.value = frequency;
+
+      gain.gain.setValueAtTime(0.0001, time);
+      gain.gain.linearRampToValueAtTime(0.15, time + 0.04);
+      gain.gain.setValueAtTime(0.15, time + length - 0.06);
+      gain.gain.linearRampToValueAtTime(0.0001, time + length);
+
+      oscillator.connect(gain);
+      gain.connect(audioContext.destination);
+
+      oscillator.start(time);
+      oscillator.stop(time + length);
     });
+
+    setTimeout(() => {
+      button.disabled = false;
+      button.textContent = "▶ Reproducir otra vez";
+      status.textContent = "Espero que te haya gustado. ♡";
+    }, 17000);
+
+  } catch (error) {
+    button.disabled = false;
+    button.textContent = "▶ Intentar de nuevo";
+    status.textContent = "No se pudo iniciar el audio. Inténtalo otra vez.";
+  }
+}
+
+/* CONFETI */
+function celebrate() {
+  const symbols = ["💗", "🎀", "✨", "🌸", "♡"];
+
+  for (let i = 0; i < 65; i++) {
+    const piece = document.createElement("div");
+    piece.className = "confetti";
+    piece.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    piece.style.left = Math.random() * 100 + "vw";
+    piece.style.animationDuration = (2 + Math.random() * 3) + "s";
+    piece.style.fontSize = (15 + Math.random() * 20) + "px";
+    document.body.appendChild(piece);
+
+    setTimeout(() => piece.remove(), 5500);
   }
 
-  setTimeout(() => container.innerHTML="",5500);
+  document.getElementById("celebrationMessage").textContent =
+    "¡Que tengas un cumpleaños increíble, Fridu! ♡";
 }
-
-// INICIALIZAR TODO AL FINAL
-// Esto evita el error que impedía usar el botón Siguiente.
-newMemoryGame();
-showScreen();
-updateGate();
-setInterval(updateGate,1000);
-
 </script>
+
 </body>
 </html>
