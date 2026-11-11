@@ -696,18 +696,29 @@ function showBored() {
 }
 
 /* BOTÓN */
-let presses = 0;
+const pressMessages = [
+  "TE DIJE QUE NOOO JAJAJA 😭",
+  "¿No tienes botón que respetar? :b",
+  "Fridu, tenemos un problema JAJAJA.",
+  "Ya vi que te gusta desobedecer. 😭",
+  "Bueno, ya, puedes picarlo otra vez. ♡",
+  "¿Y si mejor seguimos con el regalo? JAJAJA",
+  "Este botón ya se arrepintió de existir."
+];
+
+let lastPressMessage = -1;
+
 function pressMe() {
-  presses++;
-  const messages = [
-    "Te dije que no lo picaras JAJAJA.",
-    "¿Otra vez? 😭",
-    "Bueno, ya vi que no haces caso.",
-    "Está bien, ganaste. :b",
-    "Última vez... bueno, tú sabrás JAJAJA."
-  ];
+  let next;
+
+  do {
+    next = Math.floor(Math.random() * pressMessages.length);
+  } while (next === lastPressMessage);
+
+  lastPressMessage = next;
+
   document.getElementById("pressFeedback").textContent =
-    messages[Math.min(presses - 1, messages.length - 1)];
+    pressMessages[next];
 }
 
 /* MENSAJITOS */
