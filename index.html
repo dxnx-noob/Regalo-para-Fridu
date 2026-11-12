@@ -244,6 +244,37 @@ footer{
   font-size:13px;
   margin:26px 0 10px;
 }
+
+/* CORRECCIÓN DE DESPLAZAMIENTO EN IPHONE */
+html, body {
+  min-height: 100%;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+}
+
+#app {
+  overflow: visible;
+}
+
+.screen.active {
+  touch-action: pan-y;
+}
+
+.gallery,
+.photo-card {
+  touch-action: pan-y;
+}
+
+.photo-card img {
+  pointer-events: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
 @media(max-width:400px){
   #app{padding:15px 12px 28px}
   .panel{padding:25px 16px}
